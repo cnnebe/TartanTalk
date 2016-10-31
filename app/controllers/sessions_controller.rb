@@ -3,9 +3,6 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token, only: [:destroy]
   
-  def new
-    @user = User.new
-  end
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
