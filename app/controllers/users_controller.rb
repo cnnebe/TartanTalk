@@ -8,7 +8,7 @@ skip_before_action :authenticate_user!
 		@inactive_users = User.inactive.by_role.alphabetical
 	end
 
-	def new
+  def new
     @user = User.new
 end
 
@@ -28,23 +28,23 @@ end
     end
   end
 
-	def edit
-	end
+  def edit
+  end
 
-	def update
+  def update
     if @user.update(user_params) && current_user.role == 'admin'
       flash[:notice] ="#{@user.name} is updated."
       redirect_to @user
     elsif @user.update(user_params) && current_user.role == 'student'
       if @user.active == false
-      	flash[:notice] = "Your account has been deleted."
-      	redirect_to signout_path 
+        flash[:notice] = "Your account has been deleted."
+        redirect_to signout_path 
       elsif @user.anonymous == false
-      	flash[:notice] = "You are no longer anonymous."
-      	redirect_to @user
+        flash[:notice] = "You are no longer anonymous."
+        redirect_to @user
       else 
-      	flash[:notice] = "You are now anonymous."
-      	redirect_to @user
+        flash[:notice] = "You are now anonymous."
+        redirect_to @user
       end   
     else
       render :action => 'edit'
