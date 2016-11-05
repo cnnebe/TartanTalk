@@ -1,9 +1,185 @@
-<div class="jumbotron">
-  <h1>Welcome to Tartan Talk</h1>
-  <p>Cool Description Here</p>
-  <%if current_user%>
-    <p><span class="glyphicon glyphicon-heart"></span> Nice to see you, <%= current_user.username%> <span class="glyphicon glyphicon-heart"></span></p>
-  <%end%>
-  <p>Sign up or log in, then create a chatroom or browse existing rooms to start chatting.</p>
-</div>
+    <%= stylesheet_link_tag "about","main.css" %>
+    <%= javascript_include_tag 'about',"jquery.min.js" %>
+    <%= javascript_include_tag 'about',"jquery.scrollex.min.js" %>    
+    <%= javascript_include_tag 'about',"jquery.scrolly.min.js" %>
+    <%= javascript_include_tag 'about',"skel.min.js" %>
+    <%= javascript_include_tag 'about',"util.js" %>
+    <%= javascript_include_tag 'about',"main.js" %>
+  <!-- Sidebar -->
+    <section id="sidebar">
+      <div class="inner">
+        <nav>
+          <ul>
+            <img src="/images/Logo.png" alt="icon" 
+            style="width:100%; height:auto;">
+            <li><a href="#intro">Welcome</a></li>
+            <li><a href="#one">Who we are</a></li>
+            <li><a href="#two">What we do</a></li>
+            <li><a href="#three">Get in touch</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
 
+
+<!-- Wrapper -->
+  <div id="wrapper">
+    <div id="divfix">
+<!--     <img src="/images/scotty.png" alt="scotty" style="width:140px;height:auto;"></div> -->
+    <!-- Intro -->
+      <section id="intro" class="wrapper style1 fullscreen fade-up">
+        <div class="inner">
+          <h1>TartanTalk</h1>
+          <p>An easy and fast way to access CMU Therapy services. Chat now, anonymously.</p>
+          <ul class="actions">
+            <% if current_user %>
+                <li>
+                  <%= link_to "Log Out", logout_path, class: "button",method: "delete" %>
+                </li>
+            <% else %>
+                <li><%= link_to "Sign Up",signup_path, class: "button"%></li>
+                <li><%= link_to "Log In",login_path, class: "button"%></li>
+            <% end %>
+        </ul>
+
+        </div>
+      </section>
+
+    <!-- One -->
+      <section id="one" class="wrapper style2 spotlights" style="background-color:#72cfee;">
+        <section>
+          <a href="#" class="image"><img src="/images/student.jpg" alt="" data-position="center center" /></a>
+          <div class="content">
+            <div class="inner">
+              <h2>Student Counselors</h2>
+              <p>We are a group of volunteers.</p>
+              <ul class="actions">
+                <li><a href="#" class="button">Learn more</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <a href="#" class="image"><img src="/images/therapy.jpg" alt="" data-position="top center" /></a>
+          <div class="content">
+            <div class="inner">
+              <h2>Professional Counselors</h2>
+              <p>We are registered therapy counslting professionals at CMU Health Services.</p>
+              <ul class="actions">
+                <li><a href="#" class="button">Learn more</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <!-- <section>
+          <a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+          <div class="content">
+            <div class="inner">
+              <h2>Ultricies aliquam</h2>
+              <p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+              <ul class="actions">
+                <li><a href="#" class="button">Learn more</a></li>
+              </ul>
+            </div>
+          </div>
+        </section> -->
+      </section>
+
+    <!-- Two -->
+      <section id="two" class="wrapper style3 fade-up" style="background-color:#EB8A93;">
+        <div class="inner">
+          <h2>The Possibilities</h2>
+          <div class="features">
+            <section>
+              <span class="icon major fa-user-secret"></span>
+              <h3>Chat Anonymously</h3>
+              <p>Have ideas,concerns, or fears that you want to express but do not feel comfortable sharing openly? With TartanTalk you can chat anonymously about anything and everything with professionals and student counselors.</p>
+            </section>
+            <section>
+              <span class="icon major fa-heart"></span>
+              <h3>Become a Student Volunteer</h3>
+              <p>There are many students on CMU's campus who are passionate about  giving back to their community and changing the culture on our campus. If you are one of them, you can become a student counselor on TartankTalk!</p>
+            </section>
+            <section>
+              <span class="icon major fa-play"></span>
+              <h3>Start the Conversation</h3>
+              <p>Have an idea or topic that you are passionate about? Want to begin certain dialogues with your fellow CMU students? Launch conversations in TartanTalks public forumn.</p>
+            </section>
+            <section>
+              <span class="icon major fa fa-users"></span>
+              <h3>Join the Conversation</h3>
+              <p>Want to see what matters to the CMU community? Using TartanTalks public forumns you can browse through the different conversations CMU students are having. And, you get the opportunity to join in the conversation. </p>
+            </section>
+            <!-- <section>
+              <span class="icon major fa-chain"></span>
+              <h3>Urna quis bibendum</h3>
+              <p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+            </section>
+            <section>
+              <span class="icon major fa-diamond"></span>
+              <h3>Aliquam urna dapibus</h3>
+              <p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+            </section> !-->
+          </div>
+          <ul class="actions">
+            <li><a href="#" class="button">Learn more</a></li>
+          </ul>
+        </div>
+      </section>
+
+    <!-- Three -->
+      <section id="three" class="wrapper style1 fade-up" style="background-color:#19a0cc;">
+        <div class="inner">
+          <h2>Get in touch</h2>
+          <!-- <p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p> -->
+          <div class="split style1">
+            <section>
+              <form method="post" action="#">
+                <div class="field half first">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name" />
+                </div>
+                <div class="field half">
+                  <label for="email">Email</label>
+                  <input type="text" name="email" id="email" />
+                </div>
+                <div class="field">
+                  <label for="message">Message</label>
+                  <textarea name="message" id="message" rows="5"></textarea>
+                </div>
+                <ul class="actions">
+                  <li><a href="" class="button submit">Send Message</a></li>
+                </ul>
+              </form>
+            </section>
+            <section>
+              <ul class="contact">
+                <li>
+                  <h3>Address</h3>
+                  <span>1060 Morewood Ave, Pittsburgh, PA 15213<br />
+                  USA</span>
+                </li>
+                <li>
+                  <h3>Hours</h3>
+                  <span>8:30am - 7:00pm</span>
+                </li>
+                <li>
+                  <h3>Phone</h3>
+                  <span>(412) 268-2157</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+
+  </div>
+
+<!-- Footer -->
+  <footer id="footer" class="wrapper style1-alt" style="background-color:#0e5971;">
+    <div class="inner">
+      <ul class="menu">
+        <li>&copy; TartanTalk. All rights reserved.</li>
+      </ul>
+    </div>
+  </footer>

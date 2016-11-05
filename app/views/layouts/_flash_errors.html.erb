@@ -1,6 +1,9 @@
-<% flash.each do |name, msg| %>
-  <div class="alert alert-danger" data-options="animation_speed:500, animation:'fadeOut';" class="alert-box <%= flash[:notice] ? "success" : "warning" %> radius">
-    <a href="#" class="close">&times;</a>
-    <%= msg %>
+<% if flash.notice %>
+  <div class="alert alert-danger">
+      <% flash.notice.each do |type, messages|%>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><%messages.each do |msg|%>
+          <%=type%> <%=msg%>
+        <%end%>
+      <%end%>
   </div>
-<% end %>
+<%end%>
