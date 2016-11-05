@@ -25,7 +25,7 @@ gem "omniauth-google-oauth2"
 
 gem "listen"
 
-gem 'will_paginate', '3.0.7'
+#gem 'will_paginate', '3.0.7'
 gem 'simple_form'
 gem 'nested_form', '0.3.2'
 gem 'validates_timeliness', '3.0.14'

@@ -4,8 +4,8 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
 skip_before_action :authenticate_user!
 
 	def index
-		@active_users = User.active.by_role.alphabetical.paginate(:page => params[:page]).per_page(10)
-		@inactive_users = User.inactive.by_role.alphabetical.paginate(:page => params[:page]).per_page(10)
+		@active_users = User.active.by_role.alphabetical
+		@inactive_users = User.inactive.by_role.alphabetical
 	end
 
 	def new
