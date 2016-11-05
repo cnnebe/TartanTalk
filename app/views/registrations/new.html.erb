@@ -1,26 +1,34 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
+<%= render partial: 'layouts/navbar' %>
+<% if !logged_in? %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
 
-    <h2 id="log-in-title">Chat Anonymously</h2>
-    <h3> <i> Get a random username and skips Authentication by Google. Your name is not stored or visible. </i> </h3>
-    <p> Your Andrew ID confirms that you're a CMU student. No one you chat with will be able to view your Andrew ID during the chat unless you choose to reveal it. </p>
+      <h2 id="log-in-title">Chat Anonymously</h2>
 
-    <div class="auth-form well">
-    <%= form_for(User.new, url: signup_path) do |f| %>
+      <h3> <i> Get a random username and skips Authentication by Google. Your name is not stored or visible. </i> </h3>
 
-      <%=f.label :name, "Enter your Andrew ID"%>
-      <div class="input-group">
-        <span class="input-group-addon">@</span>
-          <%= f.text_field :name, class: "form-control"%>
+      <p> Your Andrew ID confirms that you're a CMU student. No one you chat with will be able to view your Andrew ID during the chat unless you choose to reveal it. </p>
+
+      <div class="auth-form well">
+      <%= form_for(User.new, url: signup_path) do |f| %>
+        <%=f.label :name, "Enter your Andrew ID"%>
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+            <%= f.text_field :name, class: "form-control"%>
+        </div>
+        <div class="actions">
+          <%= f.submit "sign up", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+       <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
       </div>
-
-      <div class="actions">
-        <%= f.submit "sign up", class: "btn btn-primary" %>
-      </div>
-
-    <% end %>
+        <%= render partial: 'layouts/flash_errors'%>
     </div>
-
-      <%= render partial: 'layouts/flash_errors'%>
   </div>
-</div>
+
+<% else %> 
+<!-- Don't show signup if already logged in    -->
+  <br><br><br>
+  <center><h1> You are already logged in! </h1></center>
+  <a href="/" class="navbar-brand" data-turbolinks="false">Return to Tartan Talk</a>.
+<% end %>

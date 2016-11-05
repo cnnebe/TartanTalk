@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     end 
     if user
       session[:user_id] = user.id
-      redirect_to root_path
+      redirect_to chatrooms_path
     elsif user
       session[:user_id] = user.id
       redirect_to chatrooms_path

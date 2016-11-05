@@ -1,3 +1,9 @@
+<% if !logged_in? %>
+<p> u suck </p>
+
+<% else %>
+
+
 <% if current_user.role == "admin" || current_user.id == @user.id %>
 
 <h2>Profile</h2> <br>
@@ -20,5 +26,7 @@
 <% else %>
 
 <h1> LOL </h1>
+
+<% end %>
 
 <% end %>

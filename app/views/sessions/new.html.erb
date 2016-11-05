@@ -1,34 +1,22 @@
+<%= render partial: 'layouts/navbar' %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-
-    <h2 id="log-in-title">Log In</h2>
     <div class="auth-form well">
-    <%= form_for(User.new, url: login_path) do |f| %>
 
-      <%=f.label :username%>
-      <div class="input-group">
-        <span class="input-group-addon">@</span>
-          <%= f.text_field :username, class: "form-control"%>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "log in", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-    </div>
-    <%= render partial: 'layouts/flash_errors'%>
-  </div>
-
-   <div>
+      <!-- Options if already logged in -->
       <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+        <h1> Signed in as <strong><%= current_user.name %></strong>!
+        <%= link_to "Sign out", signout_path, id: "sign_out" %> </h1>
+
+      <!-- Login Options -->
       <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+       <h2 id="log-in-title">Log In</h2>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", class: "button" %>
       <% end %>
     </div>
-    <div>
-    <%= yield %>
-    </div>
+  </div>
 
+  <%= render partial: 'layouts/flash_errors'%>
+  <%= yield %>
+  
 </div>
