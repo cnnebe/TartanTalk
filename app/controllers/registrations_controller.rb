@@ -8,7 +8,13 @@ class RegistrationsController < ApplicationController
 
   def create 
     user = User.new(user_params)
+    user.save!
     if user.save
+      user.username = "user-#{ SecureRandom.hex(10)}" 
+      user.active = true
+      user.anonymous = true
+      user.role = 'student'
+      user.save!
       session[:user_id] = user.id
       redirect_to chatrooms_path
     else
@@ -19,6 +25,6 @@ class RegistrationsController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :active, :anonymous, :name, :role)
     end
 end
