@@ -14,6 +14,14 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  after_filter :user_activity
+
+  private
+
+  def user_activity
+    @current_user.try :touch
+  end
+
 
   protected
 

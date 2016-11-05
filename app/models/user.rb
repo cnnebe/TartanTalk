@@ -12,10 +12,11 @@ class User < ApplicationRecord
   scope :by_role,      -> { order(:role) }
   scope :alphabetical, -> { order(:username) }
   scope :staff,    -> { where.not(role: 'student') }
+  scope :online, lambda{ where("updated_at > ?", 10.minutes.ago) }
 
    ROLES = [['Administrator', :admin],['Professional Counselor', :professional],['Peer Counselor', :peer],['Student',:student]]
 
-   def self.from_omniauth(auth)
+  def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
@@ -27,5 +28,10 @@ class User < ApplicationRecord
       user.username = "user-#{ SecureRandom.hex(10)}" 
       user.save!
     end
-end
+  end
+
+  def online?
+    updated_at > 10.minutes.ago
+  end
+
 end
