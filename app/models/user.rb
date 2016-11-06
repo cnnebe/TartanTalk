@@ -23,8 +23,6 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.active = true 
-      user.anonymous = false
       user.username = "user-#{ SecureRandom.hex(10)}" 
       user.save!
     end

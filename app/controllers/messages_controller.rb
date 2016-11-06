@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     message.user = current_user
     if message.save
       #If the user is an anonymous session or selects anonymous, display username
-      if message.user.name == nil or message.user.anonymous == true
+      if message.user.name == nil or message.chatroom.anonymous == true
       ActionCable.server.broadcast 'messages',
         message: message.content,
         user: message.user.username

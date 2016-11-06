@@ -17,8 +17,6 @@ end
     @user.save!
     if @user.save
       @user.username = "user-#{ SecureRandom.hex(10)}" 
-      @user.active = true
-      @user.anonymous = true
       @user.role = 'student'
       @user.save!
       session[:user_id] = @user.id
@@ -39,12 +37,6 @@ end
       if @user.active == false
         flash[:notice] = "Your account has been deleted."
         redirect_to signout_path 
-      elsif @user.anonymous == false
-        flash[:notice] = "You are no longer anonymous."
-        redirect_to @user
-      else 
-        flash[:notice] = "You are now anonymous."
-        redirect_to @user
       end   
     else
       render :action => 'edit'
@@ -56,7 +48,7 @@ end
     @user = User.find(params[:id])
   end
   def user_params
-      params.require(:user).permit(:username, :active, :anonymous, :name, :role, :id)
+      params.require(:user).permit(:username, :active, :name, :role, :id)
     end
 
 

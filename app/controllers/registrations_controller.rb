@@ -11,8 +11,6 @@ class RegistrationsController < ApplicationController
     user.save!
     if user.save
       user.username = "user-#{ SecureRandom.hex(10)}" 
-      user.active = true
-      user.anonymous = true
       user.role = 'student'
       user.save!
       session[:user_id] = user.id

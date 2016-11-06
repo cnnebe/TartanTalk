@@ -14,6 +14,8 @@
 
       <%= f.input :private, as: :boolean,  label: "Private Chat" %>
 
+       <%= f.input :anonymous, as: :boolean,  label: "Anonymous Chat" %>
+
       <%= f.input :emergency, as: :boolean, label: "Is this an Emergency?" %>
 
       <%= f.input :counselor_type, collection: Chatroom::TYPES, allow_blank: false, input_html: {class: "avg"}, label: "Do you want a professional, and/or peer counselor?"  %>

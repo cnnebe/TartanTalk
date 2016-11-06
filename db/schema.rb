@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20161106002121) do
     t.boolean  "staff",          default: false
     t.boolean  "private",        default: true
     t.boolean  "emergency",      default: false
+    t.boolean  "anonymous",      default: false
     t.integer  "user_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
@@ -58,7 +59,6 @@ ActiveRecord::Schema.define(version: 20161106002121) do
     t.datetime "oauth_expires_at"
     t.string   "role",             default: "Student"
     t.boolean  "active",           default: true
-    t.boolean  "anonymous"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end

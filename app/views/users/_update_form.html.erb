@@ -5,10 +5,7 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> User</legend>
 
-
-      <%= f.input :anonymous, as: :boolean, checked_value: true, unchecked_value: false, label: "Anonymous" %>
-
-      <%= f.input :active, as: :boolean, checked_value: false, unchecked_value: true, label: "Delete Account" %>
+      <%= f.input :active, as: :boolean, label: "Delete Account" %>
 
       <%= f.input :role, collection: User::ROLES, input_html: {class: "avg"}  %>
 

@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
     if user === nil 
       user = User.find_by(user_params)
     end 
-    if user
-      session[:user_id] = user.id
-      redirect_to chatrooms_path
+    if user && !user.active?
+      reset_session
+      redirect_to_root_path, flash[:notice] =  "Account does not exist"
     elsif user
       session[:user_id] = user.id
       redirect_to chatrooms_path
@@ -28,6 +28,6 @@ class SessionsController < ApplicationController
   #private
 
     def user_params
-      params.require(:user).permit(:username, :active, :anonymous, :name, :role, :id)
+      params.require(:user).permit(:username, :active, :name, :role, :id)
     end
 end
