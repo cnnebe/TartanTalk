@@ -26,7 +26,13 @@ Rails.application.routes.draw do
   resources :staffs
   
   get 'users/:id', to: "users#show", as: "profile"
+
+  # Semi-static page routes
+  get 'faq' => 'welcome#faq', as: :faq
+  get 'terms' => 'welcome#terms', as: :terms
+  get 'privacy' => 'welcome#privacy', as: :privacy
   
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
 end
+

@@ -3,4 +3,22 @@
 class Message < ApplicationRecord
   belongs_to :chatroom
   belongs_to :user
+
+  def display_anon
+  	if self.user.online? 
+  		"(online) #{self.user.username}"
+  	else 
+  		"(offline) #{self.user.username}"
+  	end
+  end
+
+  def display_name
+  	if self.user.online? 
+  		"(online) #{self.user.name}"
+  	else 
+  		"(offline) #{self.user.name}"
+  	end
+  end
+
+
 end

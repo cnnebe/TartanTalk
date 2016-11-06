@@ -3,9 +3,33 @@ class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :users, through: :messages
   validates :topic, presence: true, uniqueness: true, case_sensitive: false
+  validates :user_id, presence: true
   before_validation :sanitize, :slugify
 
   validates :counselor_type, inclusion: { in: %w[all professional peer], message: "is not a recognized counselor type." }, presence: true
+
+  # Scopes
+  scope :active,       -> { where(active: true) }
+  scope :inactive,     -> { where(active: false) }
+
+  scope :recent,      -> { order(:created_at) }
+  scope :alphabetical, -> { order(:topic) }
+
+  scope :anonymous, -> { where(anonymous: true) }
+  scope :nonanonymous, -> { where(anonymous: false) }
+
+  scope :privatechat,    -> { where(private: true) }
+  scope :publicchhat,    -> { where(private: false) }
+
+  scope :emergency, -> { where(emergency: true) }
+  scope :nonemergency, -> { where(emergency: false) }
+
+  scope :professional, -> {where(counselor_type: 'professional')}
+  scope :peer, -> {where(counselor_type: 'peer')}
+  scope :allcounselors, -> {where(counselor_type: 'all')}
+
+  scope :staff, -> {where(staff: true)}
+  scope :nonstaff, -> {where(staff: false)}
 
   def to_param
     self.slug
@@ -21,6 +45,7 @@ class Chatroom < ApplicationRecord
 
   # Counselor types for creation form.
   TYPES = [['all', :all],['Professional Counselor', :professional],['Peer Counselor', :peer]]
+  
   
 
 end
