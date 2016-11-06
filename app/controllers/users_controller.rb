@@ -6,6 +6,7 @@ skip_before_action :authenticate_user!
   def index
     @active_users = User.active.by_role.alphabetical
     @inactive_users = User.inactive.by_role.alphabetical
+    @online_users = User.active.online.by_role.alphabetical
   end
 
   def new

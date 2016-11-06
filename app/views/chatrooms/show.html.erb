@@ -1,12 +1,22 @@
 <%= render partial: 'layouts/navbar' %>
-<div class="row col-md-8 col-md-offset-2">
-  <h1><%= @chatroom.topic %></h1>
-  
-  <% if current_user.role != 'student' && @chatroom.private && !@chatroom.counselor.present? %>
+<% if current_user.role != 'student' && @chatroom.private && !@chatroom.counselor.present? %>
   <%= render 'update_form' %>
   <% end %>
+<div class="row col-md-8 col-md-offset-2">
+  <h1><%= @chatroom.topic %></h1>
  
+<% if @chatroom.private && current_user.id == @chatroom.counselor.to_f %>
+<% if User.active.online.include? User.find(@chatroom.user_id) %> Patient: (Online) <% else %> Patient: (Offline)
+ <% end %>
 
+
+<% elsif @chatroom.private && current_user.id == @chatroom.user_id && @chatroom.counselor.present? %>
+<% if User.active.online.include? User.find(@chatroom.counselor) %> Counselor: (Online) <% else %> Counselor: (Offline)
+ <% end %>
+
+
+
+<% end %>
 
 <div class="panel panel-default">
   <% if @chatroom.messages.any? %>
