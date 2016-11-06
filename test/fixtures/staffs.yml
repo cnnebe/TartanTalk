@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gender: MyString
+  bio: MyString
+  is_professional: false
+  user_id: 1
+
+two:
+  gender: MyString
+  bio: MyString
+  is_professional: false
+  user_id: 1

@@ -7,7 +7,7 @@ class ChatroomsController < ApplicationController
   end
 
   def new
-    if request.referrer.split("/").last == "chatrooms"
+    if request.referrer && request.referrer.split("/").last == "chatrooms"
       flash[:notice] = nil
     end
     @chatroom = Chatroom.new
@@ -47,6 +47,6 @@ class ChatroomsController < ApplicationController
   private
 
     def chatroom_params
-      params.require(:chatroom).permit(:topic)
+      params.require(:chatroom).permit(:topic, :counselor_type, :counselor, :active, :staff, :private, :emergency)
     end
 end

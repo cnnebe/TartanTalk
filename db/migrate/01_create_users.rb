@@ -7,10 +7,9 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :oauth_token
       t.datetime :oauth_expires_at
-      t.string :role
-      t.boolean :active
+      t.string :role, default: 'Student'
+      t.boolean :active, default: true
       t.boolean :anonymous
-      t.string :anonusername
 
       t.timestamps
     end

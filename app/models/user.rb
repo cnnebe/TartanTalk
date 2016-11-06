@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :chatrooms, through: :messages
 
   validates :username, presence: false, uniqueness: false
-  #validates :role, inclusion: { in: %w[admin professional peer student], message: "is not a recognized role in system" }
+  validates :role, inclusion: { in: %w[admin professional peer student], message: "is not a recognized role in system" }
 
   # Scopes
   scope :active,       -> { where(active: true) }
