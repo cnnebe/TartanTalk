@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       user = User.find_by(user_params)
     end 
     if user && !user.active?
+      session[:user_id] = user.id
       reset_session
       redirect_to_root_path, flash[:notice] =  "Account does not exist"
     elsif user

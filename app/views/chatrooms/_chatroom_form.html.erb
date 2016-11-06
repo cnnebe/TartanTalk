@@ -22,7 +22,7 @@
 
        <%= f.input :counselor, collection: User.staff, include_blank: true,input_html: {class: "avg"}, label: "Select a Counselor if you want to reach a specific one."  %>
 
-      <% if current_user.role != "Student" %>
+      <% if current_user.role != "student" %>
       <%= f.input :staff, as: :boolean, label: "Staff Only Chat?" %>
       <%= f.input :active, as: :boolean, label: "Active Chat?" %>
       <% end %>

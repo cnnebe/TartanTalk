@@ -1,4 +1,5 @@
 <%= render partial: 'layouts/navbar' %>
+<% if logged_in? && current_user.role != "student" %>
 <% if @active_users.empty? %>
   <h4>No active users at this time.</h4>
 <% else %>
@@ -6,14 +7,16 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th width="225">Username</th>
-        <th width="125">Role</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Role</th>
       </tr>
     </thead>
     <tbody>
       <% @active_users.each do |user| %>
         <tr>
-          <td><%= link_to user.username, user_path(user) %></td>
+          <td><%= link_to user.name, user_path(user) %></td>
+          <td><%=user.username %></td>
           <td><%= user.role %></td>
         </tr>
       <% end %>
@@ -21,3 +24,37 @@
   </table>
 <% end %>
 <p>&nbsp;</p>
+<% end %>
+
+<% if logged_in? && current_user.role == "admin" %> 
+<% if @inactive_users.empty? %>
+  <h4>No inactive users at this time.</h4>
+
+<% else %>
+<h4>Inactive Users</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inactive_users.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, user_path(user) %></td>
+          <td><%=user.username %></td>
+          <td><%= user.role %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<p>&nbsp;</p>
+
+<% else %> 
+
+<h1> The page you are looking for does not exist or may be inaccessible </h1>
+
+<% end %>
