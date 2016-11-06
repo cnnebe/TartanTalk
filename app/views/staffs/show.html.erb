@@ -26,6 +26,11 @@
   <%= @staff.gender %>
 </p>
 
+<p>
+  <strong>Online:</strong>
+  <%= @online_users.include? @staff.user %>
+</p>
+
 <% if current_user.role == "admin" || current_user.id = @staff.user.id %>
 
 <p>

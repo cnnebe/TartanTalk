@@ -9,6 +9,7 @@
     <tr>
       <th>Name</th>
       <th>Counselor Type</th>
+      <th>Online </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= staff.user.name %></td>
         <td><%= staff.is_professional %></td>
+        <td><%= @online_users.include? staff.user %></td>
         <td><%= link_to 'View Profile', staff %></td> 
 
         <% if current_user.role == "admin" || current_user.role == staff.user_id %>

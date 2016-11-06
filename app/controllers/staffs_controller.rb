@@ -5,11 +5,13 @@ class StaffsController < ApplicationController
   # GET /staffs.json
   def index
     @staffs = Staff.all
+    @online_users = User.active.online.by_role.alphabetical
   end
 
   # GET /staffs/1
   # GET /staffs/1.json
   def show
+    @online_users = User.active.online.by_role.alphabetical
   end
 
   # GET /staffs/new
