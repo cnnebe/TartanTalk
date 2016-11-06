@@ -1,14 +1,14 @@
+<%= render partial: 'layouts/navbar' %>
+<% if logged_in? %>
 <p id="notice"><%= notice %></p>
 
-<h1>Staffs</h1>
+<h1>Counselors</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Gender</th>
-      <th>Bio</th>
-      <th>Is professional</th>
-      <th>User</th>
+      <th>Name</th>
+      <th>Counselor Type</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,13 +16,14 @@
   <tbody>
     <% @staffs.each do |staff| %>
       <tr>
-        <td><%= staff.gender %></td>
-        <td><%= staff.bio %></td>
+        <td><%= staff.user.name %></td>
         <td><%= staff.is_professional %></td>
-        <td><%= staff.user_id %></td>
-        <td><%= link_to 'Show', staff %></td>
-        <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
-        <td><%= link_to 'Destroy', staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'View Profile', staff %></td> 
+
+        <% if current_user.role == "admin" || current_user.role == staff.user_id %>
+        <td>|<%= link_to 'Edit', edit_staff_path(staff) %>|</td>
+        <td><%= link_to 'Remove User from Staff', staff, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +31,12 @@
 
 <br>
 
-<%= link_to 'New Staff', new_staff_path %>
+<% if current_user.role == "admin" %>
+<%= link_to 'Add New Counselor', new_staff_path %>
+<% end %>
+
+<% else %>
+
+<h1> The page you requested does not exist or may be inaccessible. </h1>
+
+<% end %>

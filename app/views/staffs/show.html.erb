@@ -1,8 +1,19 @@
+<% if logged_in? %>
+<%= render partial: 'layouts/navbar' %>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Gender:</strong>
-  <%= @staff.gender %>
+  <strong>User:</strong>
+  <%= @staff.user.name %>
+</p>
+
+<p>
+  <strong>Counselor Type:</strong>
+  <% if @staff.is_professional %>
+  Professional 
+  <% else %> 
+  Peer 
+  <% end %>
 </p>
 
 <p>
@@ -11,14 +22,29 @@
 </p>
 
 <p>
-  <strong>Is professional:</strong>
-  <%= @staff.is_professional %>
+  <strong>Gender:</strong>
+  <%= @staff.gender %>
 </p>
+
+<% if current_user.role == "admin" || current_user.id = @staff.user.id %>
 
 <p>
-  <strong>User:</strong>
-  <%= @staff.user_id %>
+  <strong>Username:</strong>
+  <%= @staff.user.username %>
 </p>
 
-<%= link_to 'Edit', edit_staff_path(@staff) %> |
+<%= link_to 'Edit Staff Profile', edit_staff_path(@staff) %> |
+<%= link_to 'Edit User Profile', edit_user_path(@staff.user) %> |
+<% end %> 
+
+<% if current_user.role == "admin" %>
+<%= link_to 'Remove User from Staff', @staff, method: :delete, data: { confirm: 'Are you sure?' } %>|
+<% end %>
 <%= link_to 'Back', staffs_path %>
+
+<% else %>
+
+<h1> The page you requested does not exist or may be inaccessible. </h1>
+
+<% end %>
+

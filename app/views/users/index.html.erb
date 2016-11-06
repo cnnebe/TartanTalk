@@ -1,5 +1,6 @@
 <%= render partial: 'layouts/navbar' %>
 <% if logged_in? && current_user.role != "student" %>
+
 <% if @active_users.empty? %>
   <h4>No active users at this time.</h4>
 <% else %>

@@ -2,6 +2,7 @@
 class User < ApplicationRecord
   has_many :messages
   has_many :chatrooms, through: :messages
+  has_one :staff
 
   validates :username, presence: false, uniqueness: false
  # validates :role, inclusion: { in: %w[admin professional peer student], message: "is not a recognized role in system" }
@@ -11,6 +12,7 @@ class User < ApplicationRecord
   scope :inactive,     -> { where(active: false) }
   scope :by_role,      -> { order(:role) }
   scope :alphabetical, -> { order(:username) }
+  scope :nonstaff, -> { where(role: 'student') }
   scope :staff,    -> { where.not(role: 'student') }
   scope :online, lambda{ where("updated_at > ?", 10.minutes.ago) }
 
@@ -31,5 +33,6 @@ class User < ApplicationRecord
   def online?
     updated_at > 10.minutes.ago
   end
+
 
 end

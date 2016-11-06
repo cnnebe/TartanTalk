@@ -1,5 +1,13 @@
+<% if logged_in? && current_user.role == "admin"%>
+<%= render partial: 'layouts/navbar' %>
 <h1>New Staff</h1>
 
 <%= render 'form', staff: @staff %>
+
+<% else %>
+
+<h1> The page you requested does not exist or may be inaccessible. </h1>
+
+<% end %>
 
 <%= link_to 'Back', staffs_path %>

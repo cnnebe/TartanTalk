@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :staffs
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   resources :chatrooms, param: :slug
   resources :messages
   resources :users
+  resources :staffs
   
   get 'users/:id', to: "users#show", as: "profile"
   

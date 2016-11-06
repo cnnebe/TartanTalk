@@ -28,6 +28,15 @@ class StaffsController < ApplicationController
 
     respond_to do |format|
       if @staff.save
+        # If creation successful, we need to change
+        # role in actual user account.
+        if @staff.is_professional
+          @staff.user.role = "professional"
+          @staff.user.save!
+        else
+          @staff.user.role = "peer"
+          @staff.user.save!
+        end
         format.html { redirect_to @staff, notice: 'Staff was successfully created.' }
         format.json { render :show, status: :created, location: @staff }
       else
@@ -54,6 +63,8 @@ class StaffsController < ApplicationController
   # DELETE /staffs/1
   # DELETE /staffs/1.json
   def destroy
+    @staff.user.role = "student"
+    @staff.user.save!
     @staff.destroy
     respond_to do |format|
       format.html { redirect_to staffs_url, notice: 'Staff was successfully destroyed.' }
