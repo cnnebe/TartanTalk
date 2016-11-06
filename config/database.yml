@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: chatty_development
+  database: tartan_talk
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: chatty_test
+  database: tartan_talk
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: chatty_production
-  username: chatty
-  password: <%= ENV['CHATTY_DATABASE_PASSWORD'] %>
+  database: tartan_talk_production
+  username: tartan_talk
+  password: <%= ENV['TARTAN_TALK_DATABASE_PASSWORD'] %>
