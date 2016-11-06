@@ -8,6 +8,7 @@ class CreateChatrooms < ActiveRecord::Migration[5.0]
       t.boolean :staff, default: false
       t.boolean :private, default: true
       t.boolean :emergency, default: false
+      t.references :user, index: true, foreign_key: true
       t.timestamps
     end
   end

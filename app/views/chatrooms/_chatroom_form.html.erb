@@ -25,9 +25,7 @@
       <%= f.input :active, as: :boolean, label: "Active Chat?" %>
       <% end %>
 
-     
-
-
+      <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 
       <div class="form-actions">
         <%= f.submit 'Create Chatroom', :class => 'btn btn-primary' %>

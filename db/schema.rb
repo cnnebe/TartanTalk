@@ -23,9 +23,11 @@ ActiveRecord::Schema.define(version: 20161106002121) do
     t.boolean  "staff",          default: false
     t.boolean  "private",        default: true
     t.boolean  "emergency",      default: false
+    t.integer  "user_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "slug"
+    t.index ["user_id"], name: "index_chatrooms_on_user_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(version: 20161106002121) do
     t.datetime "updated_at",                           null: false
   end
 
+  add_foreign_key "chatrooms", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
 end
