@@ -4,7 +4,7 @@ class CreateChatrooms < ActiveRecord::Migration[5.0]
     create_table :chatrooms do |t|
       t.string :topic
       t.string :counselor_type, default: 'all'
-      t.integer :counselor, 
+      t.integer :counselor
       t.boolean :active, default: true
       t.boolean :staff, default: false
       t.boolean :private, default: true

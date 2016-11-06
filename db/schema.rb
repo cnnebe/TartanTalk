@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20161106002121) do
   create_table "chatrooms", force: :cascade do |t|
     t.string   "topic"
     t.string   "counselor_type", default: "all"
-    t.string   "counselor",      default: "all"
+    t.integer  "counselor"
     t.boolean  "active",         default: true
     t.boolean  "staff",          default: false
     t.boolean  "private",        default: true
