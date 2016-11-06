@@ -1,55 +1,66 @@
-<% if logged_in? %>
 <%= render partial: 'layouts/navbar' %>
-<p id="notice"><%= notice %></p>
+<div class="container"> 
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+            <div class="card card-container">
+            <div class="well">
+            <% if logged_in? %>
+              <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @staff.user.name %>
-</p>
+              <p>
+                <strong>User:</strong>
+                <%= @staff.user.name %>
+              </p>
 
-<p>
-  <strong>Counselor Type:</strong>
-  <% if @staff.is_professional %>
-  Professional 
-  <% else %> 
-  Peer 
-  <% end %>
-</p>
+              <p>
+                <strong>Counselor Type:</strong>
+                <% if @staff.is_professional %>
+                Professional 
+                <% else %> 
+                Peer 
+                <% end %>
+              </p>
 
-<p>
-  <strong>Bio:</strong>
-  <%= @staff.bio %>
-</p>
+              <p>
+                <strong>Online:</strong>
+                <%= @online_users.include? @staff.user %>
+              </p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @staff.gender %>
-</p>
+              <p>
+                <strong>Bio:</strong>
+                <%= @staff.bio %>
+              </p>
 
-<p>
-  <strong>Online:</strong>
-  <%= @online_users.include? @staff.user %>
-</p>
+              <p>
+                <strong>Gender:</strong>
+                <%= @staff.gender %>
+              </p>
 
-<% if current_user.role == "admin" || current_user.id = @staff.user.id %>
+              <% if current_user.role == "admin" || current_user.id = @staff.user.id %> 
+              <!-- Only show username if admin or the actual counselor -->
+                <p>
+                  <strong>Username:</strong>
+                  <%= @staff.user.username %>
+                </p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @staff.user.username %>
-</p>
+                <!-- Only actual staff member or admin can edit -->
+                <%= link_to 'Edit Staff Profile', edit_staff_path(@staff) %> |
+                <%= link_to 'Edit User Account', edit_user_path(@staff.user) %> |
+              <% end %> 
 
-<%= link_to 'Edit Staff Profile', edit_staff_path(@staff) %> |
-<%= link_to 'Edit User Profile', edit_user_path(@staff.user) %> |
-<% end %> 
+              <% if current_user.role == "admin" %> <!-- Only an admin can remove a staff member -->
+                <%= link_to 'Remove User from Staff', @staff, method: :delete, data: { confirm: 'Are you sure?' } %>|
+              <% end %>
 
-<% if current_user.role == "admin" %>
-<%= link_to 'Remove User from Staff', @staff, method: :delete, data: { confirm: 'Are you sure?' } %>|
-<% end %>
-<%= link_to 'Back', staffs_path %>
+              <%= link_to 'Back', staffs_path %>
 
-<% else %>
+            <% else %>
+              <h1> The page you requested does not exist or may be inaccessible. </h1>
+            <% end %>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1> The page you requested does not exist or may be inaccessible. </h1>
-
-<% end %>
 

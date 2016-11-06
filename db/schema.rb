@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20161106002121) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.string   "role",             default: "Student"
+    t.string   "role",             default: "student"
     t.boolean  "active",           default: true
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false

@@ -1,6 +1,6 @@
 {
   "name": "TartanTalk",
-  "description": "A chat application for CMU students and CaPS",
+  "description": "A chat application for CMU students to get counseling and talk to those who listen. Managed by CaPS",
   "repository": "",
   "keywords": ["CMU", "CaPS", "chat"],
   "success_url": "/",
@@ -8,4 +8,5 @@
     "postdeploy": "bundle exec rake db:migrate"
   },
   "addons": ["heroku-redis"]
+  "Adapted from" "https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable"
 }

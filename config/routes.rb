@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :sessions, only: [:create, :destroy]
- #resource :home, only: [:show]
+  
+  #resource :home, only: [:show]
+  #root to: "home#show" 
 
- # root to: "home#show"
+ # Source: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
   root "welcome#about"
 
   get '/edit', to: "users#edit"

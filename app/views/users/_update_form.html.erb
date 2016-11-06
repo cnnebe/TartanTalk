@@ -2,22 +2,26 @@
 <div class="row">
   <div class="small-8 columns">
     <%= simple_form_for @user, html: { class: 'form-horizontal' } do |f| %>
-  <fieldset>
-    <legend><%= controller.action_name.capitalize %> User</legend>
+    <fieldset>
+    <legend>Edit User Account</legend>
+      <% if current_user.role == "admin" %> <!-- Admins "deactivate" accounts. Users "delete". Only admin can change roles. -->
+        <%= f.input :active, as: :boolean, label: "Deactivate Account", checked_value: false, unchecked_value: true, hint: 'Once an account is deactivated, that user can no longer login. You may reverse this action at anytime.' %>
+        <br> <br> <br>
+        <%= f.input :role, collection: User::ROLES, include_blank: false, input_html: {class: "avg"} %>
+        <p> Role automatically updates when a new user is added or removed from staff. </p> 
+        <h3> <b>Do not update role to professional or peer.</b> Instead, create a <b><%= link_to 'new staff member.', new_staff_path %></b> </h3> 
+        <h3> Only update <b>TRUSTED USERS</b> to administrations. They will have access to the entire system and chat. </h3>
 
-      <%= f.input :active, as: :boolean, label: "Delete Account" %>
-
-      <%= f.input :role, collection: User::ROLES, input_html: {class: "avg"}  %>
-
-
+      <% else %>
+        <%= f.input :active, as: :boolean, label: "Delete Account", checked_value: false, unchecked_value: true %>
+        <h3> Warning. Once an account is deleted, you will be logged out and will be <b>unable to login again.</b> </h3>
+      <% end %>
 
       <div class="form-actions">
         <%= f.submit 'Update Account', :class => 'button radius' %>
         <%= link_to 'Cancel', @user, :class => 'button alert radius' %>
-      </div>
-      
-  </fieldset>
-<% end %>
-
+      </div>    
+    </fieldset>
+    <% end %>
   </div>
 </div>

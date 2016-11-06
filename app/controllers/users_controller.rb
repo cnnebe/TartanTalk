@@ -1,7 +1,6 @@
-#Modify when users properly setup
 class UsersController < ApplicationController
-before_action :set_user, only: [:show, :edit, :update, :destroy]
-skip_before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!
 
   def index
     @active_users = User.active.by_role.alphabetical
@@ -11,14 +10,14 @@ skip_before_action :authenticate_user!
 
   def new
     @user = User.new
-end
+  end
 
   def create 
     @user = User.new(user_params)
     @user.save!
-    if @user.save
+    if @user.save #Create random username and role upon successful Google Authentication
       @user.username = "user-#{ SecureRandom.hex(10)}" 
-      @user.role = 'student'
+      @user.role = 'student' # Not needed via default but ensures security if role modified in request transit.
       @user.save!
       session[:user_id] = @user.id
       redirect_to chatrooms_path
@@ -31,9 +30,11 @@ end
   end
 
   def update
+    # Keep session active if admin modifies or deactivates a user. 
     if @user.update(user_params) && current_user.role == 'admin'
       flash[:notice] ="#{@user.name} is updated."
       redirect_to @user
+    # End session if user deletes his or her own account.
     elsif @user.update(user_params) && current_user.role == 'student'
       if @user.active == false
         flash[:notice] = "Your account has been deleted."

@@ -1,4 +1,4 @@
-#Registration (TODO: Needs updating)
+# Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable 
 class RegistrationsController < ApplicationController
   skip_before_action :authenticate_user!
 
@@ -9,9 +9,9 @@ class RegistrationsController < ApplicationController
   def create 
     user = User.new(user_params)
     user.save!
-    if user.save
+    if user.save # Create username for user on account creation for one-time use accounts.
       user.username = "user-#{ SecureRandom.hex(10)}" 
-      user.role = 'student'
+      user.role = 'student' # Not necessary via default role but puts in added security in case of abuse of one-time account
       user.save!
       session[:user_id] = user.id
       redirect_to chatrooms_path

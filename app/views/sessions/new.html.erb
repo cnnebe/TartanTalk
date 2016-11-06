@@ -1,8 +1,11 @@
+<!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
 <%= render partial: 'layouts/navbar' %>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
+<div class="container"> 
+<div class="row centered-form">
+<div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+  <div class="card card-container">
+  <div class="well">
     <div class="auth-form well">
-
       <!-- Options if already logged in -->
       <% if current_user %>
         <h1> Signed in as <strong><%= current_user.name %></strong>!
@@ -15,8 +18,10 @@
       <% end %>
     </div>
   </div>
-
+  </div>
+</div>
+</div>
+</div>
   <%= render partial: 'layouts/flash_errors'%>
   <%= yield %>
-  
 </div>

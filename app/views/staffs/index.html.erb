@@ -1,44 +1,48 @@
 <%= render partial: 'layouts/navbar' %>
-<% if logged_in? %>
-<p id="notice"><%= notice %></p>
+<div class="container"> 
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+      <div class="card card-container">
+      <div class="well">
+      <% if logged_in? %>
+        <p id="notice"><%= notice %></p>
+        <h1>Counselors</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Counselor Type</th>
+              <th>Online </th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
 
-<h1>Counselors</h1>
+          <tbody>
+            <% @staffs.each do |staff| %>
+              <tr>
+                <td><%= staff.user.name %></td>
+                <td><%= staff.is_professional %></td>
+                <td><%= @online_users.include? staff.user %></td>
+                <td><%= link_to 'View Profile', staff %></td> 
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Counselor Type</th>
-      <th>Online </th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                <% if current_user.role == "admin" || current_user.role == staff.user_id %>
+                <!-- Only admin and actual staff member can edit-->
+                <td>|<%= link_to 'Edit', edit_staff_path(staff) %>|</td>
+                <% end %>
 
-  <tbody>
-    <% @staffs.each do |staff| %>
-      <tr>
-        <td><%= staff.user.name %></td>
-        <td><%= staff.is_professional %></td>
-        <td><%= @online_users.include? staff.user %></td>
-        <td><%= link_to 'View Profile', staff %></td> 
-
-        <% if current_user.role == "admin" || current_user.role == staff.user_id %>
-        <td>|<%= link_to 'Edit', edit_staff_path(staff) %>|</td>
-        <td><%= link_to 'Remove User from Staff', staff, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                <% if current_user.role == "admin" %> <!-- Only admin can remove staff -->
+                <td><%= link_to 'Remove User from Staff', staff, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                <% end %>
+                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <br>
+        <% if current_user.role == "admin" %> <!-- Only admin can add new staff -->
+          <%= link_to 'Add New Counselor', new_staff_path %>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if current_user.role == "admin" %>
-<%= link_to 'Add New Counselor', new_staff_path %>
-<% end %>
-
-<% else %>
-
-<h1> The page you requested does not exist or may be inaccessible. </h1>
-
-<% end %>
+      
+      <% else %>
+        <h1> The page you requested does not exist or may be inaccessible. </h1>
+      <% end %>

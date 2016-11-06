@@ -1,13 +1,15 @@
+<!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
 <%= render partial: 'layouts/navbar' %>
 <% if !logged_in? %>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-
+  <div class="container"> 
+  <div class="row centered-form">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+    <div class="card card-container">
+    <div class="well">
       <h2 id="log-in-title">Chat Anonymously</h2>
+      <h3> <i> One time use account gives you a random username that you can use for anonymous chat. Skips Google Authentication. </i> </h3>
 
-      <h3> <i> Get a random username and skips Authentication by Google. Your name is not stored or visible. </i> </h3>
-
-      <p> Your Andrew ID confirms that you're a CMU student. No one you chat with will be able to view your Andrew ID during the chat unless you choose to reveal it. </p>
+      <p> Your Andrew ID confirms that you're a CMU student. If you create or enter an anonymous chat, no one you chat with will be able to view your Andrew ID during the chat unless you choose to reveal it. </p>
 
       <div class="auth-form well">
       <%= form_for(User.new, url: signup_path) do |f| %>
@@ -20,10 +22,14 @@
           <%= f.submit "sign up", class: "btn btn-primary" %>
         </div>
       <% end %>
+      <!-- Source: https://richonrails.com/articles/google-authentication-in-ruby-on-rails -->
        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
       </div>
         <%= render partial: 'layouts/flash_errors'%>
     </div>
+    </div>
+  </div>
+  </div>
   </div>
 
 <% else %> 

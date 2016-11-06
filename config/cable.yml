@@ -1,6 +1,8 @@
 # Action Cable uses Redis by default to administer connections, channels, 
 #  and sending/receiving messages over the WebSocket.
 
+#Source: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
+
 production:
   adapter: redis
   url: <%=ENV['REDIS_URL']%>

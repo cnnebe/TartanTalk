@@ -1,4 +1,6 @@
-#Sessions: No need to modify
+# Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable 
+# Google Auth Source: https://richonrails.com/articles/google-authentication-in-ruby-on-rails
+
 class SessionsController < ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token, only: [:destroy]

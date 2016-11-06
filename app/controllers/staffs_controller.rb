@@ -32,10 +32,10 @@ class StaffsController < ApplicationController
       if @staff.save
         # If creation successful, we need to change
         # role in actual user account.
-        if @staff.is_professional
+        if @staff.is_professional # Change user role to professional if professional staff
           @staff.user.role = "professional"
           @staff.user.save!
-        else
+        else # Change user role to peer if peer staff
           @staff.user.role = "peer"
           @staff.user.save!
         end
@@ -65,7 +65,7 @@ class StaffsController < ApplicationController
   # DELETE /staffs/1
   # DELETE /staffs/1.json
   def destroy
-    @staff.user.role = "student"
+    @staff.user.role = "student" # Change role back to default of student if removing staff member.
     @staff.user.save!
     @staff.destroy
     respond_to do |format|
