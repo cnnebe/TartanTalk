@@ -35,6 +35,7 @@
 
       <% if current_user.role != "student" %>
         <%= f.input :staff, as: :boolean, label: "Staff Only Chat?" %> <br>
+        <p> Staff only chats should NOT be public </p>
         <%= f.input :active, as: :boolean, label: "Active Chat?" %> <br>
       <% end %>
 

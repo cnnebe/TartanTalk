@@ -5,7 +5,7 @@
      If there is no user assigned, any user can view until its claimed. 
      If there is no counselor assigned, any counselor can view until its claimed. -->
 
-<% if !@chatroom.private || (current_user.id == @chatroom.user_id) || (current_user.id == @chatroom.counselor) || ((@chatroom.counselor == nil) && (current_user.role != "student")) || ((@chatroom.user_id == nil) && (current_user.role == "student")) %>
+<% if !@chatroom.private || (@chatroom.staff && current_user.role != "student") || (current_user.id == @chatroom.user_id) || (current_user.id == @chatroom.counselor) || ((@chatroom.counselor == nil) && (current_user.role != "student")) || ((@chatroom.user_id == nil) && (current_user.role == "student")) %>
 
 <!-- If chatroom is an emergency. Display emergency information if you're a student. -->
 <% if current_user.role == "student" && @chatroom.emergency %>
@@ -26,11 +26,14 @@
 <!-- If the chat is public only the creator or staff member access edit from here -->
 <% elsif !@chatroom.private && ((@chatroom.user_id == current_user.id) || (current_user.role != "student")) %>
   <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
+<!-- If it's a staff chat, then only the creator or an admin can edit it from here. -->
+<% elsif @chatroom.staff && ((@chatroom.user_id == current_user.id) || (current_user.role == "admin")) %>
+  <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
 <% end %>
 
 <!-- If private chatroom is not yet claimed by a student or counselor, display form to claim it
-     and complete chat initiation -->
-<% if @chatroom.private && ((!@chatroom.counselor.present? && current_user.role != "student") || (!@chatroom.user_id.present? && current_user.role == "student")) %>
+     and complete chat initiation, unless it is a staff chat.-->
+<% if !@chatroom.staff && @chatroom.private && ((!@chatroom.counselor.present? && current_user.role != "student") || (!@chatroom.user_id.present? && current_user.role == "student")) %>
   <%= render 'update_form' %>
 <% end %>
 
