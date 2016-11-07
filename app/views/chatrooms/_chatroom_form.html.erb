@@ -1,51 +1,55 @@
 <% if logged_in? %>
 <div class="chatroom-form">
 <div class="container"> 
-    <div class="row centered-form">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-            <div class="card card-container">
-            <div class="well">
+<div class="row centered-form">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+  <div class="card card-container">
+  <div class="well">
     <%= simple_form_for @chatroom, html: { class: 'form-horizontal' } do |f| %>
-  <fieldset>
+    <fieldset>
     <legend><%= controller.action_name.capitalize %> Chatroom</legend>
+      <%= f.input :topic, input_html: {class: "avg"} %> <br>
+      <%= f.input :private, as: :boolean,  label: "Private Chat" %> <br>
+      <%= f.input :anonymous, as: :boolean,  label: "Anonymous Chat" %> 
+      <p> Your random username is used if you select anonymous instead of your name/andrew ID. </p> <br>
+      <%= f.input :emergency, as: :boolean, label: "Is this an Emergency?" %> <br>
 
-   
-     <%= f.input :topic, input_html: {class: "avg"} %>
-
-      <%= f.input :private, as: :boolean,  label: "Private Chat" %>
-
-       <%= f.input :anonymous, as: :boolean,  label: "Anonymous Chat" %>
-
-      <%= f.input :emergency, as: :boolean, label: "Is this an Emergency?" %>
-
-      <%= f.input :counselor_type, collection: Chatroom::TYPES, allow_blank: false, input_html: {class: "avg"}, label: "Do you want a professional, and/or peer counselor?"  %>
-
-       <%= f.input :counselor, collection: User.staff, include_blank: true,input_html: {class: "avg"}, label: "Select a Counselor if you want to reach a specific one."  %>
-
-      <% if current_user.role != "student" %>
-      <%= f.input :staff, as: :boolean, label: "Staff Only Chat?" %>
-      <%= f.input :active, as: :boolean, label: "Active Chat?" %>
+      <!-- If the user is a counselor, their ID is passed in as counselor and they
+           can choose the user to chat with. 
+           If the user is a student, their ID is passed as user_id and they can 
+           choose the type of counselor and/or counselor they wish to speak with. 
+           -->
+      <% if current_user.role == "professional" || current_user.role == "peer" %>
+        <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
+        <% if current_user.role == "professional" %>
+          <%= f.input :counselor_type, as: :hidden, input_html: { value: true} %>
+        <% else %>
+          <%= f.input :counselor_type, as: :hidden, input_html: { value: false} %>
+        <% end %>
+        <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a User if you want to reach a specific one."  %> <br>
+      <% else %>
+        <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :counselor_type, collection: Chatroom::TYPES, allow_blank: false, input_html: {class: "avg"}, label: "Do you want a professional, and/or peer counselor?"  %> <br>
+        <%= f.input :counselor, collection: User.staff, include_blank: true,input_html: {class: "avg"}, label: "Select a Counselor if you want to reach a specific one."  %> <br>
       <% end %>
 
-      <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+      <% if current_user.role != "student" %>
+        <%= f.input :staff, as: :boolean, label: "Staff Only Chat?" %> <br>
+        <%= f.input :active, as: :boolean, label: "Active Chat?" %> <br>
+      <% end %>
 
       <div class="form-actions">
         <%= f.submit 'Create Chatroom', :class => 'btn btn-primary' %>
-      </div>
-      
-  </fieldset>
-<% end %>
-
+      </div>   
+    </fieldset>
+    <% end %>
   </div>
-</div>
-</div>
-</div>
+  </div>
+  </div>
 </div>
 </div>
 </div>
 
 <% else %>
-
-<h1> You must be logged in to create a chatroom. </h1>
-
+  <h1> You must be logged in to create a chatroom. </h1>
 <% end %>

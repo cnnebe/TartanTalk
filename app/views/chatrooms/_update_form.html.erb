@@ -1,26 +1,34 @@
 <div class="chatroom-form">
 <div class="container"> 
-    <div class="row centered-form">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-            <div class="card card-container">
-            <div class="well">
+<div class="row centered-form">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+  <div class="card card-container">
+  <div class="well">
+  <!-- Confirms initiation of private chat. 
+       If counselor created chat, user has to confirm. 
+       If user created chat, counselor has to confirm initiation. 
+       -->
     <%= simple_form_for @chatroom, html: { class: 'form-horizontal' } do |f| %>
-  <fieldset>
-    <legend>Unclaimed Patient</legend>
-
-      <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
-
-      <div class="form-actions">
-        <%= f.submit 'Claim Patient', :class => 'btn btn-primary' %>
-      </div>
-      
-  </fieldset>
-<% end %>
-
+      <fieldset>
+        <% if @chatroom.counselor == nil && current_user.role != "student"%>
+          <legend>Unclaimed Patient</legend>
+          <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
+          <div class="form-actions">
+            <%= f.submit 'Claim Patient', :class => 'btn btn-primary' %>
+          </div>
+        <% elsif @chatroom.user_id == nil && current_user.role == "student" %>
+          <legend>Unclaimed Chat</legend>
+          <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+          <div class="form-actions">
+            <%= f.submit 'Initiate Chat with Counselor', :class => 'btn btn-primary' %>
+          </div>
+        <% else %>
+        <% end %>
+      </fieldset>
+    <% end %>
   </div>
-</div>
-</div>
-</div>
+  </div>
+  </div>
 </div>
 </div>
 </div>

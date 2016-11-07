@@ -14,8 +14,8 @@
     <% if @online_users.include? staff.user %>
       <tr>
         <td><%= staff.user.name %></td>
-        <td><%= staff.is_professional %></td>
-        <td><%= @online_users.include? staff.user %></td>
+        <td><% if staff.is_professional %> Professional <% else %> Peer <% end %> </td>
+        <td><% if @online_users.include? staff.user %> Yes <% else %> No <% end %> </td>
         <td><%= link_to 'View Profile', staff %></td> 
 
         <% if current_user.role == "admin" || current_user.role == staff.user_id %>
@@ -36,8 +36,8 @@
     <% staffcollection.each do |staff| %>
       <tr>
         <td><%= staff.user.name %></td>
-        <td><%= staff.is_professional %></td>
-        <td><%= @online_users.include? staff.user %></td>
+        <td><% if staff.is_professional %> Professional <% else %> Peer <% end %> </td>
+        <td><% if @online_users.include? staff.user %> Yes <% else %> No <% end %> </td>
         <td><%= link_to 'View Profile', staff %></td> 
 
         <% if current_user.role == "admin" || current_user.role == staff.user_id %>

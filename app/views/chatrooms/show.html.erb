@@ -1,7 +1,25 @@
 <%= render partial: 'layouts/navbar' %>
-<% if current_user.role != 'student' && @chatroom.private && !@chatroom.counselor.present? %>
+
+<!-- If chatroom is an emergency. Display emergency information if you're a student. -->
+<% if current_user.role == "student" && @chatroom.emergency %>
+<div class="container">
+<div class="jumbotron">
+  <h2>Carnegie Mellon students in distress or experiencing a crisis should call 412-268-2922 immediately. </h2>  
+  <h3> During CaPS regular hours, Monday through Friday from 8:30 a.m. to 4 p.m., you can stop by to be screened for a same-day, urgent appointment.  After hours, you can call our main number 412-268-2922 to speak immediately with a phone counselor. </h3>
+  <p></p>
+  <p><a class="btn btn-primary btn-lg" href="http://www.cmu.edu/counseling/get-support/suicide-prevention-for-yourself.html" role="button">Having Suicidal Thoughts?</a></p>
+</div>
+</div>
+
+<% end %>
+
+
+<!-- If private chatroom is not yet claimed by a student or counselor, display form to claim it
+     and complete chat initiation -->
+<% if @chatroom.private && ((!@chatroom.counselor.present? && current_user.role != "student") || (!@chatroom.user_id.present? && current_user.role == "student")) %>
   <%= render 'update_form' %>
-  <% end %>
+<% end %>
+
 <div class="row col-md-8 col-md-offset-2">
   <h1><%= @chatroom.topic %></h1>
  
