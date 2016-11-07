@@ -1,5 +1,12 @@
 <%= render partial: 'layouts/navbar' %>
 
+<!-- If the chatroom is public, anyone can see it. 
+     Otherwise, you must be the counselor or user assigned to the room. 
+     If there is no user assigned, any user can view until its claimed. 
+     If there is no counselor assigned, any counselor can view until its claimed. -->
+
+<% if !@chatroom.private || (current_user.id == @chatroom.user_id) || (current_user.id == @chatroom.counselor) || ((@chatroom.counselor == nil) && (current_user.role != "student")) || ((@chatroom.user_id == nil) && (current_user.role == "student")) %>
+
 <!-- If chatroom is an emergency. Display emergency information if you're a student. -->
 <% if current_user.role == "student" && @chatroom.emergency %>
 <div class="container">
@@ -13,6 +20,13 @@
 
 <% end %>
 
+<!-- If the chat is private only the chatroom user and counselor assigned can access edit from here -->
+<% if @chatroom.private && ((@chatroom.user_id == current_user.id) || (@chatroom.counselor == current_user.id)) %>
+  <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
+<!-- If the chat is public only the creator or staff member access edit from here -->
+<% elsif !@chatroom.private && ((@chatroom.user_id == current_user.id) || (current_user.role != "student")) %>
+  <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
+<% end %>
 
 <!-- If private chatroom is not yet claimed by a student or counselor, display form to claim it
      and complete chat initiation -->
@@ -22,31 +36,34 @@
 
 <div class="row col-md-8 col-md-offset-2">
   <h1><%= @chatroom.topic %></h1>
- 
-<% if @chatroom.private && current_user.id == @chatroom.counselor %>
-<% if User.active.online.include? User.find(@chatroom.user_id) %> Patient: (Online) <% else %> Patient: (Offline)
- <% end %>
 
+  <!-- Private chat: Display patient's online status if counselor -->
+  <% if @chatroom.private && current_user.id == @chatroom.counselor %> 
+    <% if User.active.online.include? User.find(@chatroom.user_id) %> <h3> Patient is Online </h3><% else %> <h3>Patient is offline </h3>
+    <% end %>
+  <!-- Display online status of patient if user for private chat -->
+  <% elsif @chatroom.private && current_user.id == @chatroom.user_id && @chatroom.counselor.present? %> 
+    <% if User.active.online.include? User.find(@chatroom.counselor) %> <h3> Counselor is Online </h3> <% else %> <h3> Counselor is offline </h3> 
+    <% end %>
+  <% end %>
 
-<% elsif @chatroom.private && current_user.id == @chatroom.user_id && @chatroom.counselor.present? %>
-<% if User.active.online.include? User.find(@chatroom.counselor) %> Counselor: (Online) <% else %> Counselor: (Offline)
- <% end %>
+  <div class="panel panel-default"> <!-- Display Messages -->
+    <% if @chatroom.messages.any? %>
+      <div class="panel-body" id="messages">
+        <%= render partial: 'messages/message', collection: @chatroom.messages%>
+      </div>
+    <%else%>
+      <div class="panel-body hidden" id="messages">
+      </div>
+    <%end%>
+  </div>
 
-
-
-<% end %>
-
-<div class="panel panel-default">
-  <% if @chatroom.messages.any? %>
-    <div class="panel-body" id="messages">
-      <%= render partial: 'messages/message', collection: @chatroom.messages%>
-    </div>
-  <%else%>
-    <div class="panel-body hidden" id="messages">
-    </div>
-  <%end%>
-</div>
-
-
+  <!-- Form to Send Messages -->
   <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
 </div>
+
+<% else %>
+
+<h1> The page you requested does not exist or may be inacccesible. </h1>
+
+<% end %>

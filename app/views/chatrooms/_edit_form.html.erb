@@ -1,0 +1,37 @@
+  <!-- Confirms initiation of private chat. 
+       If counselor created chat, user has to confirm. 
+       If user created chat, counselor has to confirm initiation. 
+       -->
+    <%= simple_form_for @chatroom, html: { class: 'form-horizontal' } do |f| %>
+      <fieldset>
+        <!-- Counselor's edit options when assigned to upon claiming a private chat-->
+        <% if @chatroom.private && @chatroom.counselor == current_user.id%>
+          <%= f.input :emergency, as: :boolean, label: "Escalate to Emergency?" %> <br>
+          <%= f.input :active, as: :boolean, checked_value: false, unchecked_value: true, label: "Archive Chat?" %> <br>
+          <%= f.input :topic, input_html: {class: "avg"} %> <br>
+          <div class="form-actions">
+            <%= f.submit 'Initiate Chat with Counselor', :class => 'btn btn-primary' %>
+          </div>
+        
+         <!-- Staff's edit options for public chats-->
+        <% elsif !@chatroom.private && current_user.role != "student" %>
+          <%= f.input :emergency, as: :boolean, label: "Escalate to Emergency?" %> <br>
+          <%= f.input :active, as: :boolean, checked_value: false, unchecked_value: true, label: "Archive Chat?" %> <br>
+          <%= f.input :topic, input_html: {class: "avg"} %> <br>
+          <div class="form-actions">
+            <%= f.submit 'Initiate Chat with Counselor', :class => 'btn btn-primary' %>
+          </div>
+
+        <% elsif @chatroom.user_id == current_user.id %>
+          <%= f.input :active, as: :boolean, checked_value: false, unchecked_value: true, label: "Archive Chat?" %> <br>
+          <%= f.input :topic, input_html: {class: "avg"} %> <br>
+          <div class="form-actions">
+            <%= f.submit 'Edit Chatroom', :class => 'btn btn-primary' %>
+          </div>
+
+        <% else %>
+          <h3> You cannot edit the chatroom. </h3>
+        <% end %>
+      </fieldset>
+    <% end %>
+  

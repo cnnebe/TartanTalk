@@ -1,0 +1,21 @@
+<%= render partial: 'layouts/navbar' %>
+<div class="container"> 
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+            <div class="card card-container">
+            <div class="well">
+            <% if logged_in? && (current_user.role != "student" || current_user.id = @chatroom.user_id) %>
+            	<h1>Editing Chatroom: <%= @chatroom.topic %></h1>
+            	<%= render 'edit_form', chatroom: @chatroom %>
+            <% else %>
+            	<h1> The page you requested does not exist or may be inaccessible.</h1>
+            <% end %>
+			<%= link_to 'Back to Chatroom', @chatroom %> | <%= link_to 'Back to all Available Chatrooms', chatrooms_path %>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
