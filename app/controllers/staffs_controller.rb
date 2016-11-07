@@ -4,8 +4,10 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.all
+    @staffs = Staff.all #All Counselors
     @online_users = User.active.online.by_role.alphabetical
+    @professionals = Staff.professional
+    @peers = Staff.peer
   end
 
   # GET /staffs/1

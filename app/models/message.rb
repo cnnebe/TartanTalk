@@ -4,6 +4,9 @@ class Message < ApplicationRecord
   belongs_to :chatroom
   belongs_to :user
 
+
+  
+
   def display_anon
   	if self.user.online? 
   		"(online) #{self.user.username}"

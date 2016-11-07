@@ -1,0 +1,62 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Counselor Type</th>
+      <th>Online </th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <% if online %> <!-- If filtering by online status, then need separate conditonals so different table -->
+  <tbody>
+    <% staffcollection.each do |staff| %>
+    <% if @online_users.include? staff.user %>
+      <tr>
+        <td><%= staff.user.name %></td>
+        <td><%= staff.is_professional %></td>
+        <td><%= @online_users.include? staff.user %></td>
+        <td><%= link_to 'View Profile', staff %></td> 
+
+        <% if current_user.role == "admin" || current_user.role == staff.user_id %>
+        <!-- Only admin and actual staff member can edit-->
+        <td>|<%= link_to 'Edit', edit_staff_path(staff) %>|</td>
+        <% end %>
+
+        <% if current_user.role == "admin" %> <!-- Only admin can remove staff -->
+        <td><%= link_to 'Remove User from Staff', staff, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+
+  <% else %>
+  <tbody>
+    <% staffcollection.each do |staff| %>
+      <tr>
+        <td><%= staff.user.name %></td>
+        <td><%= staff.is_professional %></td>
+        <td><%= @online_users.include? staff.user %></td>
+        <td><%= link_to 'View Profile', staff %></td> 
+
+        <% if current_user.role == "admin" || current_user.role == staff.user_id %>
+        <!-- Only admin and actual staff member can edit-->
+        <td>|<%= link_to 'Edit', edit_staff_path(staff) %>|</td>
+        <% end %>
+
+        <% if current_user.role == "admin" %> <!-- Only admin can remove staff -->
+        <td><%= link_to 'Remove User from Staff', staff, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+        <% end %> 
+      </tr>
+    <% end %>
+  </tbody>
+  <% end %>
+</table>
+
+<br>
+<% if current_user.role == "admin" %> <!-- Only admin can add new staff -->
+  <%= link_to 'Add New Counselor', new_staff_path %>
+<% end %>
+      
+     
