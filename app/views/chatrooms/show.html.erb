@@ -61,8 +61,10 @@
     <%end%>
   </div>
 
+  <% if @chatroom.active %>
   <!-- Form to Send Messages -->
   <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
+  <% end %>
 </div>
 
 <% else %>
