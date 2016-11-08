@@ -4,10 +4,10 @@
 <div>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">All Counselors</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Professional Counselors</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Peer Counselors</a></li>
-    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Counselors Online</a></li>
+    <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All Counselors</a></li>
+    <li role="presentation"><a href="#professional" aria-controls="professional" role="tab" data-toggle="tab">Professional Counselors</a></li>
+    <li role="presentation"><a href="#peer" aria-controls="peer" role="tab" data-toggle="tab">Peer Counselors</a></li>
+    <li role="presentation"><a href="#online" aria-controls="online" role="tab" data-toggle="tab">Counselors Online</a></li>
   </ul>
   <div class="container"> 
   <div class="row centered-form">
@@ -17,16 +17,16 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="home">
+      <div role="tabpanel" class="tab-pane active" id="all">
         <%= render partial: "layouts/index_structure", locals: {staffcollection: @staffs, online: false} %>
       </div>
-      <div role="tabpanel" class="tab-pane" id="profile">
+      <div role="tabpanel" class="tab-pane" id="professional">
         <%= render partial: "layouts/index_structure", locals: {staffcollection: @professionals, online: false} %>
       </div>
-      <div role="tabpanel" class="tab-pane" id="messages">
+      <div role="tabpanel" class="tab-pane" id="peer">
         <%= render partial: "layouts/index_structure", locals: {staffcollection: @peers, online: false} %>
       </div>
-      <div role="tabpanel" class="tab-pane" id="settings">
+      <div role="tabpanel" class="tab-pane" id="online">
        <%= render partial: "layouts/index_structure", locals: {staffcollection: @staffs, online: true} %>
        <h3> If there is no one here, then that means no one is currently online! </h3>
       </div>

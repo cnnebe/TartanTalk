@@ -2,8 +2,47 @@
 class ChatroomsController < ApplicationController
 
   def index
+    #Chatrooms
     @chatroom = Chatroom.new
     @chatrooms = Chatroom.all
+
+    #All Active Private and Public 
+    @active_public_chatrooms = Chatroom.active.nonstaff.publicchat.recent
+    @active_private_chatrooms = Chatroom.active.nonstaff.privatechat.recent
+
+    #All Archived/Inactive Private and Public 
+    @inactive_public_chatrooms = Chatroom.inactive.nonstaff.publicchat.alphabetical 
+    @inactive_private_chatrooms = Chatroom.inactive.nonstaff.privatechat.alphabetical 
+
+    #Anon Lists
+    @active_public_anon_chatrooms = Chatroom.active.nonstaff.publicchat.anonymous.recent
+    @active_private_anon_chatrooms = Chatroom.active.nonstaff.privatechat.anonymous.recent
+
+    #Non-Anon Lists
+    @active_public_nonanon_chatrooms = Chatroom.active.nonstaff.publicchat.nonanonymous.recent
+    @active_private_nonanon_chatrooms = Chatroom.active.nonstaff.privatechat.nonanonymous.recent
+
+    #Emergency 
+    @active_emergency_chatrooms = Chatroom.active.emergency.recent
+    @inactive_emergency_chatrooms = Chatroom.inactive.emergency.recent
+
+    #Staff
+    @active_staff_chatrooms = Chatroom.active.staff.recent
+    @inactive_staff_chatrooms = Chatroom.inactive.staff.alphabetical
+
+    #Professional/Peer Chat
+    @active_private_professional_chatrooms = Chatroom.active.privatechat.professional.recent
+    @active_private_peer_chatrooms = Chatroom.active.privatechat.peer.recent
+    @active_public_professional_chatrooms = Chatroom.active.publicchat.professional.recent
+    @active_public_peer_chatrooms = Chatroom.active.publicchat.peer.recent
+
+    @inactive_private_professional_chatrooms = Chatroom.inactive.privatechat.professional.recent
+    @inactive_private_peer_chatrooms = Chatroom.inactive.privatechat.peer.recent
+    @inactive_public_professional_chatrooms = Chatroom.inactive.publicchat.professional.recent
+    @inactive_public_peer_chatrooms = Chatroom.active.inpublicchat.peer.recent
+
+    #@active_unclaimed_chatrooms = Chatroom.active.allcounselors.recent
+
   end
 
   def new

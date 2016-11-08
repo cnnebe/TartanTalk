@@ -1,19 +1,95 @@
 <%= render partial: 'layouts/navbar' %>
 <%= render partial: 'layouts/flash_errors'%>
-<div class="row col-md-8 col-md-offset-2" id="chatroom-title">
-  <h1>Chatrooms</h1>
-</div>
-
-<div class="row col-md-8 col-md-offset-2" id="chatrooms">
+<% if logged_in? %>
+<h1>Available Chatrooms</h1>
+<p id="notice"><%= notice %></p>
   
-  <div id="chatroom-errors">
+  <!-- Tab Titles -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#private" aria-controls="private" role="tab" data-toggle="tab">Private Chatrooms</a></li>
+    <li role="presentation"><a href="#public" aria-controls="public" role="tab" data-toggle="tab">Public Chatrooms</a></li>
+    <% if current_user.role != "student" %>
+      <li role="presentation"><a href="#emergency" aria-controls="emergency" role="tab" data-toggle="tab">Emergencies</a></li>
+      <li role="presentation"><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Staff Chatrooms</a></li>
+    <% end %>
+  </ul>
+
+  <div class="container"> 
+  <div class="row centered-form">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+  <div class="card card-container">
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="private">
+        <% if current_user.role == "admin" %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_private_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_private_chatrooms,
+                                                                    staff: false, emergency: false} %>
+        <% elsif current_user.role == "professional" %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_private_professional_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_private_professional_chatrooms,
+                                                                    staff: false, emergency: false} %>
+        <% elsif current_user.role == "peer" %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_private_peer_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_private_peer_chatrooms,
+                                                                    staff: false, emergency: false} %>
+
+        <% else %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_anon_collection: @active_private_anon_chatrooms, 
+                                                                   active_non_anon_collection: @active_private_nonanon_chatrooms, 
+                                                                   inactive_private_chat_collection: @inactive_private_chatrooms,
+                                                                    staff: false, emergency: false} %>
+        <% end %>
+      </div>
     
+      <div role="tabpanel" class="tab-pane" id="public">
+        <% if current_user.role == "admin" %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_public_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_public_chatrooms,
+                                                                    staff: false, emergency: false} %>
+        <% elsif current_user.role == "professional" %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_public_professional_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_public_professional_chatrooms,
+                                                                    staff: false, emergency: false} %>
+        <% elsif current_user.role == "peer" %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_public_peer_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_public_peer_chatrooms,
+                                                                    staff: false, emergency: false} %>
+
+        <% else %>
+        <%= render partial: "chatrooms/chatroomcollapse", locals: {active_anon_collection: @active_public_anon_chatrooms, 
+                                                                   active_non_anon_collection: @active_public_nonanon_chatrooms, 
+                                                                   inactive_private_chat_collection: @inactive_public_chatrooms,
+                                                                    staff: false, emergency: false} %>
+        <% end %>
+      </div>
+
+      <% if current_user.role != "student" %>
+        <div role="tabpanel" class="tab-pane" id="emergency">
+           <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_staff_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_staff_chatrooms,
+                                                                    staff: true, emergency: false} %>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="staff">
+           <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_emergency_chatrooms, 
+                                                                   inactive_chat_collection: @inactive_emergency_chatrooms,
+                                                                    staff: false, emergency: true} %>
+        </div>
+      <% end %>
+    </div>
+
+<% else %> <!-- Only registered users can see chatrooms -->
+  <h1> The page you requested does not exist or may be inaccessible. </h1>
+<% end %>
   </div>
-    <ul id="chatroom-index"> 
-  <% if @chatrooms.any? %>
-      <%= render @chatrooms%>
-  <%else %>
-    </ul>
-    <p>Be the first one to make a chatroom!</p>
-  <% end %>
-</div>
+  </div>
+  </div>
+  </div>
+
+<!-- Makes tabs work -->
+<script type="text/javascript">
+  $('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>

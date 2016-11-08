@@ -12,20 +12,20 @@ class Chatroom < ApplicationRecord
   scope :active,       -> { where(active: true) }
   scope :inactive,     -> { where(active: false) }
 
-  scope :recent,      -> { order(:created_at) }
+  scope :recent,      -> { order(:updated_at) }
   scope :alphabetical, -> { order(:topic) }
 
   scope :anonymous, -> { where(anonymous: true) }
   scope :nonanonymous, -> { where(anonymous: false) }
 
   scope :privatechat,    -> { where(private: true) }
-  scope :publicchhat,    -> { where(private: false) }
+  scope :publicchat,    -> { where(private: false) }
 
   scope :emergency, -> { where(emergency: true) }
   scope :nonemergency, -> { where(emergency: false) }
 
-  scope :professional, -> {where(counselor_type: 'professional')}
-  scope :peer, -> {where(counselor_type: 'peer')}
+  scope :professional, -> {!where(counselor_type: 'peer')}
+  scope :peer, -> {where(!counselor_type: 'professional')}
   scope :allcounselors, -> {where(counselor_type: 'all')}
 
   scope :staff, -> {where(staff: true)}
