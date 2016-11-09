@@ -40,7 +40,7 @@ class ChatroomsController < ApplicationController
     @inactive_private_professional_chatrooms = Chatroom.inactive.privatechat.professional.recent
     @inactive_private_peer_chatrooms = Chatroom.inactive.privatechat.peer.recent
     @inactive_public_professional_chatrooms = Chatroom.inactive.publicchat.professional.recent
-    @inactive_public_peer_chatrooms = Chatroom.active.inpublicchat.peer.recent
+    @inactive_public_peer_chatrooms = Chatroom.inactive.publicchat.peer.recent
 
     #@active_unclaimed_chatrooms = Chatroom.active.allcounselors.recent
 
