@@ -37,7 +37,7 @@
         <% else %>
         <%= render partial: "chatrooms/chatroomcollapse", locals: {active_anon_collection: @active_private_anon_chatrooms, 
                                                                    active_non_anon_collection: @active_private_nonanon_chatrooms, 
-                                                                   inactive_private_chat_collection: @inactive_private_chatrooms,
+                                                                   inactive_chat_collection: @inactive_private_chatrooms,
                                                                     staff: false, emergency: false} %>
         <% end %>
       </div>
@@ -46,21 +46,21 @@
         <% if current_user.role == "admin" %>
         <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_public_chatrooms, 
                                                                    inactive_chat_collection: @inactive_public_chatrooms,
-                                                                    staff: false, emergency: false} %>
+                                                                    staff: false, emergency: false, title: "Public Chatrooms"} %>
         <% elsif current_user.role == "professional" %>
         <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_public_professional_chatrooms, 
                                                                    inactive_chat_collection: @inactive_public_professional_chatrooms,
-                                                                    staff: false, emergency: false} %>
+                                                                    staff: false, emergency: false, title: "Public Chatrooms"} %>
         <% elsif current_user.role == "peer" %>
         <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_public_peer_chatrooms, 
                                                                    inactive_chat_collection: @inactive_public_peer_chatrooms,
-                                                                    staff: false, emergency: false} %>
+                                                                    staff: false, emergency: false, title: "Public Chatrooms"} %>
 
         <% else %>
         <%= render partial: "chatrooms/chatroomcollapse", locals: {active_anon_collection: @active_public_anon_chatrooms, 
                                                                    active_non_anon_collection: @active_public_nonanon_chatrooms, 
-                                                                   inactive_private_chat_collection: @inactive_public_chatrooms,
-                                                                    staff: false, emergency: false} %>
+                                                                   inactive_chat_collection: @inactive_public_chatrooms,
+                                                                    staff: false, emergency: false, title: "Public Chatrooms"} %>
         <% end %>
       </div>
 
@@ -68,12 +68,11 @@
         <div role="tabpanel" class="tab-pane" id="emergency">
            <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_staff_chatrooms, 
                                                                    inactive_chat_collection: @inactive_staff_chatrooms,
-                                                                    staff: true, emergency: false} %>
+                                                                    staff: true, emergency: false, title: "Emergency Chatrooms"} %>
         </div>
         <div role="tabpanel" class="tab-pane" id="staff">
-           <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @active_emergency_chatrooms, 
-                                                                   inactive_chat_collection: @inactive_emergency_chatrooms,
-                                                                    staff: false, emergency: true} %>
+           <%= render partial: "chatrooms/chatroomcollapse", locals: {active_chat_collection: @emergency, 
+                                                                    staff: false, emergency: true, title: "Staff Chatrooms"} %>
         </div>
       <% end %>
     </div>

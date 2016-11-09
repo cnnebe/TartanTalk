@@ -23,6 +23,7 @@ class ChatroomsController < ApplicationController
     @active_private_nonanon_chatrooms = Chatroom.active.nonstaff.privatechat.nonanonymous.recent
 
     #Emergency 
+    @emergency = Chatroom.emergency.recent
     @active_emergency_chatrooms = Chatroom.active.emergency.recent
     @inactive_emergency_chatrooms = Chatroom.inactive.emergency.recent
 

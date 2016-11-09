@@ -1,59 +1,46 @@
 <div class="container"> 
   <div class="col-xs-12 col-sm-11 col-md-11 ">
-  <% if logged_in? && current_user.role != "student" %>
-    <% if @active_users.empty? %>
-      <h4>No active users at this time.</h4>
+  <% if logged_in? %>
+    <% if chatcollection.empty? %>
+      <h4>You have no chatrooms available. Check your archives (unless this is the archive section) or <%= link_to 'start a new chat!',new_chatroom_path %></h4>
     <% else %>
-      <h4>Active Users</h4>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>Online</th>
+              <th>Topic</th>
+              <th>Chat Initiated</th> 
+              <% if current_user.role != "student" %>
+              <th> Anonymous </th>
+              <th> Emergency </th>
+              <% end %>
+              <th colspan="3"></th>
             </tr>
           </thead>
-          <tbody>
-            <% @active_users.each do |user| %>
+          <tbody>  
+                        
+            <% chatcollection.each do |chatroom| %>
+            <!-- Staff can view emergency/staff chats. Assigned chatroom partners can view chat. Everyone can view public chat. 
+                 Students can view open, private chats with an unclaimed students and counselors can do likewise if there is no counselor -->
+            <% if (current_user.role != "student" && chatroom.counselor == nil) || (current_user.role == "student" && chatroom.user_id == nil) || (chatroom.counselor == current_user.id) || (chatroom.user_id == current_user.id) || (current_user.role != "student" && chatroom.staff) || (current_user.role != "student" && chatroom.emergency) || !(chatroom.private) %>
               <tr>
-                <td><%= link_to user.name, user_path(user) %></td>
-                <td><%=user.username %></td>
-                <td><%= user.role %></td>
-                <td><%= @online_users.include? user %></td>
+                <td><%= link_to chatroom.topic, chatroom_path(chatroom) %></td>
+                <td><% if !chatroom.private %> Yes (public chat) <% elsif chatroom.user_id == current_user.id && chatroom.counselor == nil %> Pending <%=chatroom.counselor_type %> counselor response. <% elsif chatroom.counselor == current_user.id && chatroom.user_id == nil %> Pending student response. <% elsif ((current_user.role != "student" && chatroom.counselor == nil) || (current_user.role == "student" && chatroom.user_id == nil)) %> No. <%= link_to 'Click to Claim.', chatroom %> <% elsif current_user.role != "student" %> <% if chatroom.anonymous %> Anonymous Chat Active. <% else %> Chat Active with <%= chatroom.user_id %>. <% end %> <% else %> Chat active with <% chatroom.counselor %>. <% end %></td> 
+                <% if current_user.role != "student" %>
+                  <td><% if chatroom.anonymous %> Yes <% else %> No <% end %></td>
+                  <td><% if chatroom.emergency %> Yes <% else %> No <% end %></td>
+                <% end %>
+                <td><%= link_to 'Enter Chatroom', chatroom %></td> 
+                <% if current_user.role == "admin" || (current_user.role != "student" && !chatroom.private) || current_user.id == chatroom.user_id || current_user.id == chatroom.counselor ||   (current_user.role != "student" && chatroom.emergency) %>
+                <!-- Only admin, assigned user and counselor, or staff in emergencies can edit chatroom. Staff can edit all public.-->
+                <td>|<%= link_to 'Edit', edit_chatroom_path(chatroom) %>|</td>
+      <% end %>
               </tr>
+            <% end %>
             <% end %>
           </tbody>
         </table>
     <% end %>
     <p>&nbsp;</p>
-  <% end %>
-
-  <% if logged_in? && current_user.role == "admin" %>  <!-- Only admin can manage deactivated accounts -->
-    <% if @inactive_users.empty? %>
-      <h4>No inactive users at this time.</h4>
-    <% else %>
-      <h4>Inactive Users</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @inactive_users.each do |user| %>
-              <tr>
-                <td><%= link_to user.name, user_path(user) %></td>
-                <td><%=user.username %></td>
-                <td><%= user.role %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-    <% end %>
-  <p>&nbsp;</p>
 
   <% else %> 
   <h1> The page you are looking for does not exist or may be inaccessible </h1>
