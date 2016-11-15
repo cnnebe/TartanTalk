@@ -41,7 +41,7 @@
   <h1><%= @chatroom.topic %></h1>
 
   <!-- Private chat: Display patient's online status if counselor -->
-  <% if @chatroom.private && current_user.id == @chatroom.counselor %> 
+  <% if @chatroom.private && current_user.id == @chatroom.counselor && @chatroom.user_id.present?%> 
     <% if User.active.online.include? User.find(@chatroom.user_id) %> <h3> Patient is Online </h3><% else %> <h3>Patient is offline </h3>
     <% end %>
   <!-- Display online status of patient if user for private chat -->

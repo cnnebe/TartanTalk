@@ -63,6 +63,23 @@
     </div>
   </div>
 
+    <% elsif current_user.role == "admin" %>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#professional" aria-expanded="false" aria-controls="collapseSeven">
+          Active title
+        </a>
+      </h4>
+    </div>
+    <div id="porfessional" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      <div class="panel-body">
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: emergency, staff: staff} %>
+      </div>
+    </div>
+  </div>
+
+
   <% else %>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
