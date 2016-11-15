@@ -19,14 +19,15 @@
            If the user is a student, their ID is passed as user_id and they can 
            choose the type of counselor and/or counselor they wish to speak with. 
            -->
-      <% if current_user.role != "admin" %>
+     
+      <% if current_user.role == "professional" || current_user.role == "admin" %>
         <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
-        <% if current_user.role == "professional" || current_user.role == "admin" %>
-          <%= f.input :counselor_type, as: :hidden, input_html: { value: true} %>
-        <% else %>
-          <%= f.input :counselor_type, as: :hidden, input_html: { value: false} %>
-        <% end %>
+        <%= f.input :counselor_type, as: :hidden, input_html: { value: 'professional'} %>
         <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a User if you want to reach a specific one."  %> <br>
+      <% elsif current_user == "peer" %>
+        <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
+        <%= f.input :counselor_type, as: :hidden, input_html: { value: 'peer'} %>  
+        <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a User if you want to reach a specific one."  %> <br> 
       <% else %>
         <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :counselor_type, collection: Chatroom::TYPES, allow_blank: false, input_html: {class: "avg"}, label: "Do you want a professional, and/or peer counselor?"  %> <br>

@@ -3,7 +3,7 @@ class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :users, through: :messages
   validates :topic, presence: true, uniqueness: false, case_sensitive: false
-  validates :user_id, presence: true
+  validates :user_id, presence: false
   before_validation :sanitize, :slugify
 
   validates :counselor_type, inclusion: { in: %w[all professional peer], message: "is not a recognized counselor type." }, presence: true
