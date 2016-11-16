@@ -33,10 +33,14 @@ class UsersController < ApplicationController
   def update
     # Keep session active if admin modifies or deactivates a user. 
     if @user.update(user_params) && current_user.role == 'admin'
-      flash[:notice] ="#{@user.name} is updated."
+      if @user.active == false
+        flash[:notice] ="#{@user.name} is no longer active in the system."
+      else 
+        flash[:notice] ="#{@user.name} is updated."
+      end
       redirect_to @user
     # End session if user deletes his or her own account.
-    elsif @user.update(user_params) && current_user.role == 'student'
+    elsif @user.update(user_params) && current_user.role != 'admin'
       if @user.active == false
         flash[:notice] = "Your account has been deleted."
         redirect_to signout_path 

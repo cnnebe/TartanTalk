@@ -11,11 +11,11 @@ class SessionsController < ApplicationController
     if user === nil 
       user = User.find_by(user_params)
     end 
-    if user && !user.active?
+    if user && !user.active? && user.role != "admin"
       session[:user_id] = user.id
       reset_session
-      flash[:notice] =  "Account does not exist"
-      redirect_to_root_path
+      flash[:notice] =  "Account terminated"
+      redirect_to root_path
     elsif user
       session[:user_id] = user.id
       flash[:notice] = "You are now logged in. Start a chatroom or view an existing one!"

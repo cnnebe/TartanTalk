@@ -1,1 +1,128 @@
-<h1> FAQ </h1>
+   <%= render partial: 'layouts/navbar' %>
+   <!-- Page Content -->
+    <div class="container" id="second">
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tartan Talk FAQ
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/" data-turbolinks="false">Home</a>
+                    </li>
+                    <li class="active">FAQ</li>
+                </ol>
+            </div>
+        </div>
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Confidentiality: Will anyone know about my conversations?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      <p> Public Chatrooms are visible by all staff and students. Private chatrooms are visible depending on your criteria. If you request to speak to a peer counselor, only peer counselors will see your chatroom until it is claimed and vice versa for professional. Once a counselor claims a chatroom, only you and that counselor will be able to view it. </p> <br> <br>
+
+      <p> Protecting the privacy of students receiving CaPS services is of utmost importance to us. In accordance with law, we do not release any information about a student to anyone outside of CaPS without the explicit written permission from the student. </p> <br> <br>
+
+      <p> In the Commonwealth of Pennsylvania any individual over the age of 16 has the right to keep treatment private from his/her parents. Accordingly, we do not release confidential information to parents or family members unless a written consent has been signed. </p> <br> <br>
+
+      <p> There are limits to confidentiality. By law we are obligated to disclose personal information without permission in emergency situations where information is needed to protect the safety of someone whose life may be at risk. You can discuss any concerns you have about the limits to confidentiality with your CaPS therapist at any time. </p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          What’s the difference between a peer and professional counselor?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+      <p> All counselors are trained to be responsive and empathetic. Professional counselors are able to handle clinical concerns while peer counselors can be useful resources for when you’re stressed or lonely. Regardless, you’re welcome to select any counselor for your problems whether it’s clinical or not. </p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Why Use a One-Time Only Account
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <p> If you only want a one-time chat without signing in via Google, the one-time account is a great option. If you want different anonymous usernames, you can register multiple one-time accounts under the same andrew id. The downside is that you may be unable to build a relationship or history with a counselor, which may limit their ability to assist you. It’s great for when you have an occasional issue or problem you’d like to discuss though. </p>
+      </div>
+    </div>
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          What information is collected about me?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+      <p> <b> One time Account: </b>
+      If you use a one-time account, only your andrew id is collected. This is done for legal reasons in the event of an emergency. Unless you reveal your andrew id by creating a non-anonymous chat or telling your chat partner(s), they will not know. Staff cannot see your information if you are anonymous, unless there is a life threatening situation where they will be responsible for justifying their actions in making such a determination and held accountable by CaPS and/or law enforcement. <br> <br>
+
+      <b> Registered Account: </b>
+      Similarly, if you register using a Google Account, only your name is collected (not even your email!). Your name is used for non-anonymous chats.  </p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          How is my anonymous username created?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+        <p> It’s randomly generated upon creation using a secure random-number generator. Nobody has input into how it’s created. This is done to maximize anonymity as there is no bias in creating an anonymous username: the system just generates one.  </p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSix">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          What is psychotherapy?
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      <div class="panel-body">
+      <p> Psychotherapy is often called “counseling” or “therapy.” Psychotherapy is a process of addressing mental health and personal growth issues by talking them through in a private, confidential setting with a trained professional. The process involves weekly meetings to allow for the development of trust and comfort in the relationship between you and your therapist. This exploration in a supportive environment is a process that can lead to greater understanding and self-awareness. It can facilitate maturation and growth as well as help one develop the skills necessary to deal successfully with personal problems and life challenges. </p>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          Explore Other Services and Resources CaPS Offers (In-Person etc.)
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <a href="http://www.cmu.edu/counseling/services/index.html" > <b> CaPS Services and In-Person Appointments: </b> </a> <br> <br>   
+        <a href="http://www.cmu.edu/counseling/resources/index.html" ><b> What other resources are there? </b> </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

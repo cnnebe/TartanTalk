@@ -1,12 +1,41 @@
 <!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
 <%= render partial: 'layouts/navbar' %>
 <% if !logged_in? %>
+<h2> 
+
+        By using this service you agree to the terms of service and privacy policy. The important parts are summarized below. 
+
+
+        One-time use accounts only store your andrew ID, which is only visible during an emergency or if you start a non-anonymous chat. If you use a Google account, we only collect your name and nothing else (Google manages the rest). Your name is only visible if you start a non-anonymous chat. 
+
+
+        You agree to be respectful of all students and counselors on this website. 
+
+
+        Private chat sessions with counselors will remain confidential unless you provide your consent to reveal any information. Public chat sessions are not confidential. 
+        If you create a private chat and specify a counselor, only that counselor can see it
+        If you create a private chat, only the counselor group (all, professional, peer) will initially see it, and once a counselor claims the chatroom, then only you and counselor will be able to see the chat. 
+
+
+        Upon account creation, the system uses a secure random number generator to create a username. This username will be used for anonymous chats. 
+
+
+        One-time accounts are best if you don’t expect to regularly use this service or don’t want to establish a persistent history. One-time accounts are best for occasional loneliness or when you expect you will only use this service once. 
+
+
+        Things like depression, consistent stress, or the need for multiple chat sessions are best done by signing in via your andrew account through Google. 
+
+
+        If you would like more information, please check out our FAQ. For more information about CaPS, see the following:
+        http://www.cmu.edu/counseling/resources/index.html
+        http://www.cmu.edu/counseling/about-us/index.html
+
+       </h2>
   <div class="container"> 
   <div class="row centered-form">
   <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
     <div class="card card-container">
     <div class="well">
-      <h2> Consent Form Here </h2>
       <h2 id="log-in-title">Chat Anonymously</h2>
       <h3> <i> One time use account gives you a random username that you can use for anonymous chat. Skips Google Authentication. </i> </h3>
 
@@ -24,6 +53,8 @@
         </div>
       <% end %>
       <!-- Source: https://richonrails.com/articles/google-authentication-in-ruby-on-rails -->
+       <h3> <i>Signing with Google stills allows you to be anonymous while allowing for continous
+       interaction with a counselor. You will have access to all chats this way. </i> </h3>
        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
       </div>
         <%= render partial: 'layouts/flash_errors'%>
