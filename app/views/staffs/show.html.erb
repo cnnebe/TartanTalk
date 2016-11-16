@@ -1,12 +1,11 @@
 <%= render partial: 'layouts/navbar' %>
+<%= render partial: 'layouts/flash_success'%>
 <div class="container"> 
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
             <div class="card card-container">
             <div class="well">
             <% if logged_in? %>
-              <p id="notice"><%= notice %></p>
-
               <p>
                 <strong>User:</strong>
                 <%= @staff.user.name %>
@@ -36,7 +35,7 @@
                 <%= @staff.gender %>
               </p>
 
-              <% if current_user.role == "admin" || current_user.id = @staff.user.id %> 
+              <% if current_user.role == "admin" || current_user.id == @staff.user.id %> 
               <!-- Only show username if admin or the actual counselor -->
                 <p>
                   <strong>Username:</strong>

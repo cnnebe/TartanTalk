@@ -4,7 +4,7 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.all #All Counselors
+    @staffs = Staff.all.by_role #All Counselors
     @online_users = User.active.online.by_role.alphabetical
     @professionals = Staff.professional
     @peers = Staff.peer
@@ -55,6 +55,13 @@ class StaffsController < ApplicationController
   def update
     respond_to do |format|
       if @staff.update(staff_params)
+        if @staff.is_professional # Change user role to professional if professional staff
+          @staff.user.role = "professional"
+          @staff.user.save!
+        else # Change user role to peer if peer staff
+          @staff.user.role = "peer"
+          @staff.user.save!
+        end
         format.html { redirect_to @staff, notice: 'Staff was successfully updated.' }
         format.json { render :show, status: :ok, location: @staff }
       else
@@ -71,7 +78,7 @@ class StaffsController < ApplicationController
     @staff.user.save!
     @staff.destroy
     respond_to do |format|
-      format.html { redirect_to staffs_url, notice: 'Staff was successfully destroyed.' }
+      format.html { redirect_to staffs_url, notice: 'Staff memer successfully removed.' }
       format.json { head :no_content }
     end
   end

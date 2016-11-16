@@ -6,16 +6,15 @@
    </li>
   <% end %>
   
+  <% if logged_in? %>
   <li>
     <%= link_to "Chatrooms", chatrooms_path %>
   </li> 
 
   <li>
-    <% if logged_in? %>
     <%= link_to "Profile", profile_path(current_user.id) %>
-    <% end %>
   </li> 
-
+  <% end %>
   <li>
     <% if logged_in? && current_user.role != "student" %>
     <%= link_to "View all Users", users_path %>
@@ -28,6 +27,7 @@
     <% end %>
   </li> 
 
+  <% if logged_in? && current_user.role == "admin" %>
   <li>
     <div class="dropdown">
     <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">Staff
@@ -38,6 +38,7 @@
     </ul>
     </div>
   </li>
+  <% end %>
 </ul>
 
 <ul class="nav navbar-nav navbar-right">

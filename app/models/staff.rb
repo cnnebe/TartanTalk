@@ -11,5 +11,6 @@ class Staff < ApplicationRecord
   # Scopes
   scope :professional, -> { where(is_professional: true) }
   scope :peer, -> {where(is_professional: false)}
+  scope :by_role, -> { order(:is_professional) }
 
 end
