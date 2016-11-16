@@ -14,17 +14,21 @@ class SessionsController < ApplicationController
     if user && !user.active?
       session[:user_id] = user.id
       reset_session
-      redirect_to_root_path, flash[:notice] =  "Account does not exist"
+      flash[:notice] =  "Account does not exist"
+      redirect_to_root_path
     elsif user
       session[:user_id] = user.id
+      flash[:notice] = "You are now logged in. Start a chatroom or view an existing one!"
       redirect_to chatrooms_path
     else
-      redirect_to login_path, flash[:notice] =  {username: ["doesn't exist"]}
+      flash[:notice] =  "Login failed. If you don't have an account, sign up."
+      redirect_to login_path
     end
   end
 
   def destroy
     reset_session
+    flash[:notice] = "You have been logged out. We hope your time on Tartan Talk with helpful."
     redirect_to root_path
   end
 

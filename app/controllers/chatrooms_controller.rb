@@ -48,7 +48,6 @@ class ChatroomsController < ApplicationController
 
   def new
     if request.referrer && request.referrer.split("/").last == "chatrooms"
-      flash[:notice] = nil
     end
     @chatroom = Chatroom.new
   end
@@ -60,12 +59,14 @@ class ChatroomsController < ApplicationController
   def create
     @chatroom = Chatroom.new(chatroom_params)
     if @chatroom.save
+      flash[:notice] =  "Chatroom successfully created! Feel free to send a message!"
       respond_to do |format|
         format.html { redirect_to @chatroom }
         format.js
       end
     else
-      redirect_to new_chatroom_path, flash[:notice] =  @chatroom.errors.messages
+      flash[:notice] =  @chatroom.errors.messages
+      redirect_to new_chatroom_path
      # respond_to do |format|
      #   flash[:notice] = {error: ["a chatroom with this topic already exists"]}
      #   format.html { redirect_to new_chatroom_path }

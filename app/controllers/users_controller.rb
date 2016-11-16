@@ -20,6 +20,7 @@ class UsersController < ApplicationController
       @user.role = 'student' # Not needed via default but ensures security if role modified in request transit.
       @user.save!
       session[:user_id] = @user.id
+      flash[:notice] =  "Thanks for signing up! Start a chatroom!"
       redirect_to chatrooms_path
     else
       redirect_to signup_path, flash[:notice] =  user.errors.messages
