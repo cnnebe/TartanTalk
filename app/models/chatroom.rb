@@ -4,6 +4,7 @@ class Chatroom < ApplicationRecord
   has_many :users, through: :messages
   validates :topic, presence: true, uniqueness: false, case_sensitive: false
   validates :user_id, presence: false
+  validates :counselor, presence: false
   before_validation :sanitize, :slugify
 
   validates :counselor_type, inclusion: { in: %w[all professional peer], message: "is not a recognized counselor type." }, presence: true
@@ -18,15 +19,11 @@ class Chatroom < ApplicationRecord
   scope :anonymous, -> { where(anonymous: true) }
   scope :nonanonymous, -> { where(anonymous: false) }
 
-  scope :privatechat,    -> { where(private: true) }
-  scope :publicchat,    -> { where(private: false) }
-
   scope :emergency, -> { where(emergency: true) }
   scope :nonemergency, -> { where(emergency: false) }
 
-  scope :professional, -> {where(counselor_type: 'professional')}
-  scope :peer, -> {where(counselor_type: 'peer')}
-  scope :allcounselors, -> {where(counselor_type: 'all')}
+  scope :professional, -> {where("counselor_type != ?", 'peer')}
+  scope :peer, -> {where("counselor_type != ?", 'professional')}
 
   scope :staff, -> {where(staff: true)}
   scope :nonstaff, -> {where(staff: false)}

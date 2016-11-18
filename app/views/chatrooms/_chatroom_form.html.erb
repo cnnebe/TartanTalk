@@ -9,7 +9,6 @@
     <fieldset>
     <legend><%= controller.action_name.capitalize %> Chatroom</legend>
       <%= f.input :topic, input_html: {class: "avg"}, label: "Chat Name or Topic: " %> <br>
-      <%= f.input :private, as: :boolean,  label: "Private Chat" %> <br>
       <%= f.input :anonymous, as: :boolean,  label: "Anonymous Chat" %> 
       <p> Your random username is used if you select anonymous instead of your name/andrew ID. </p> <br>
       <%= f.input :emergency, as: :boolean, label: "Is this an Emergency?" %> <br>
@@ -23,11 +22,11 @@
       <% if current_user.role == "professional" || current_user.role == "admin" %>
         <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :counselor_type, as: :hidden, input_html: { value: 'professional'} %>
-        <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a User if you want to reach a specific one."  %> <br>
+        <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a Student if you want to reach a specific one."  %> <br>
       <% elsif current_user == "peer" %>
         <%= f.input :counselor, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :counselor_type, as: :hidden, input_html: { value: 'peer'} %>  
-        <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a User if you want to reach a specific one."  %> <br> 
+        <%= f.input :user_id, collection: User.nonstaff, include_blank: true,input_html: {class: "avg"}, label: "Select a Student if you want to reach a specific one."  %> <br> 
       <% else %>
         <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
         <%= f.input :counselor_type, collection: Chatroom::TYPES, allow_blank: false, input_html: {class: "avg"}, label: "Do you want a professional, and/or peer counselor?"  %> <br>
@@ -36,8 +35,6 @@
 
       <% if current_user.role != "student" %>
         <%= f.input :staff, as: :boolean, label: "Staff Only Chat?" %> <br>
-        <p> Staff only chats should NOT be public </p>
-        <%= f.input :active, as: :boolean, label: "Active Chat?" %> <br>
       <% end %>
 
       <div class="form-actions">

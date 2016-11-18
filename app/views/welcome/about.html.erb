@@ -30,6 +30,9 @@
             <% if current_user %>
                 <li>
                   <%= link_to "Log Out", logout_path, class: "button",method: "delete" %>
+                  <% if logged_in? %>
+                  <li><a href="/chatrooms" class="button">View your Chatrooms</a></li>
+                  <% end %>
                 </li>
             <% else %>
                 <li><%= link_to "Sign Up",signup_path, class: "button"%></li>
@@ -97,13 +100,13 @@
             </section>
             <section>
               <span class="icon major fa-play"></span>
-              <h3>Start the Conversation</h3>
-              <p>Have an idea or topic that you are passionate about? Want to begin certain dialogues with your fellow CMU students? Launch conversations through Tartan Talks public chats to engage both counselors and students.</p>
+              <h3>Have memorable conversations</h3>
+              <p>Peer and professional counselors are here to listen to you and give you whatever feedback you need. A chat on Tartan Talk is bound to be thoughtful, insightful, and memorable.</p>
             </section>
             <section>
               <span class="icon major fa fa-users"></span>
-              <h3>Join the Conversation</h3>
-              <p>Want to see what matters to the CMU community? Access existing public chatrooms on Tartan Talk, where you can browse through and engage in the different conversations CMU students are having. </p>
+              <h3>Start a Conversation</h3>
+              <p>Signup today with your andrew ID or andrew email. If you want to talk anonymously, counselors won't be able to know who you are. The system uses your andrew ID to verify that you're a CMU student. </p>
             </section>
             <!-- <section>
               <span class="icon major fa-chain"></span>
