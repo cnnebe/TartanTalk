@@ -2,13 +2,9 @@
 class ChatroomsController < ApplicationController
 
   def index
-    #Chatrooms
-    #@chatroom = Chatroom.new
-    @chatrooms = Chatroom.all
-
     #All Active and Archived Rooms
     @active_chatrooms = Chatroom.active.nonstaff.recent
-    @inactive_chatrooms = Chatroom.inactive.nonstaff.alphabetical  
+    @inactive_chatrooms = Chatroom.inactive.nonstaff.alphabetical
 
     #Active Chatrooms by Anonymity 
     @active_anon_chatrooms = Chatroom.active.nonstaff.anonymous.recent
@@ -51,11 +47,6 @@ class ChatroomsController < ApplicationController
     else
       flash[:notice] =  @chatroom.errors.messages
       redirect_to new_chatroom_path
-     # respond_to do |format|
-     #   flash[:notice] = {error: ["a chatroom with this topic already exists"]}
-     #   format.html { redirect_to new_chatroom_path }
-     #   format.js { render template: 'chatrooms/chatroom_error.js.erb'} 
-     # end
     end
   end
 

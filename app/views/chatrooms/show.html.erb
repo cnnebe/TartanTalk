@@ -1,53 +1,56 @@
 <%= render partial: 'layouts/navbar' %>
 <%= render partial: 'layouts/flash_success' %>
 
-<!-- If the chatroom is public, anyone can see it. 
-     Otherwise, you must be the counselor or user assigned to the room. 
+<!-- You must be the counselor or user assigned to the room. 
      If there is no user assigned, any user can view until its claimed. 
      If there is no counselor assigned, any counselor can view until its claimed. -->
+<div class="container"> 
+<div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+<% if (@chatroom.staff && current_user.role != "student") || (current_user.id == @chatroom.user_id) || (current_user.id == @chatroom.counselor) || ((@chatroom.counselor == nil) && (current_user.role != "student")) || ((@chatroom.user_id == nil) && (current_user.role == "student")) %>
 
-<% if !@chatroom.private || (@chatroom.staff && current_user.role != "student") || (current_user.id == @chatroom.user_id) || (current_user.id == @chatroom.counselor) || ((@chatroom.counselor == nil) && (current_user.role != "student")) || ((@chatroom.user_id == nil) && (current_user.role == "student")) %>
+  <!-- If chatroom is an emergency. Display emergency information if you're a student. -->
+  <% if current_user.role == "student" && @chatroom.emergency %>
+  <div class="container">
+  <div class="jumbotron">
+    <h2>Carnegie Mellon students in distress or experiencing a crisis should call 412-268-2922 immediately. </h2>  
+    <h3> During CaPS regular hours, Monday through Friday from 8:30 a.m. to 4 p.m., you can stop by to be screened for a same-day, urgent appointment.  After hours, you can call our main number 412-268-2922 to speak immediately with a phone counselor. </h3>
+    <p></p>
+    <p><a class="btn btn-primary btn-lg" href="http://www.cmu.edu/counseling/get-support/suicide-prevention-for-yourself.html" role="button">Having Suicidal Thoughts?</a></p>
+  </div>
+  </div>
 
-<!-- If chatroom is an emergency. Display emergency information if you're a student. -->
-<% if current_user.role == "student" && @chatroom.emergency %>
-<div class="container">
-<div class="jumbotron">
-  <h2>Carnegie Mellon students in distress or experiencing a crisis should call 412-268-2922 immediately. </h2>  
-  <h3> During CaPS regular hours, Monday through Friday from 8:30 a.m. to 4 p.m., you can stop by to be screened for a same-day, urgent appointment.  After hours, you can call our main number 412-268-2922 to speak immediately with a phone counselor. </h3>
-  <p></p>
-  <p><a class="btn btn-primary btn-lg" href="http://www.cmu.edu/counseling/get-support/suicide-prevention-for-yourself.html" role="button">Having Suicidal Thoughts?</a></p>
-</div>
-</div>
+  <% end %>
 
-<% end %>
+  <!-- Only the assigned user and counselor can access edit from here -->
+  <% if ((@chatroom.user_id == current_user.id) || (@chatroom.counselor == current_user.id)) %>
+    <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
 
-<!-- If the chat is private only the chatroom user and counselor assigned can access edit from here -->
-<% if @chatroom.private && ((@chatroom.user_id == current_user.id) || (@chatroom.counselor == current_user.id)) %>
-  <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
-<!-- If the chat is public only the creator or staff member access edit from here -->
-<% elsif !@chatroom.private && ((@chatroom.user_id == current_user.id) || (current_user.role != "student")) %>
-  <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
-<!-- If it's a staff chat, then only the creator or an admin can edit it from here. -->
-<% elsif @chatroom.staff && ((@chatroom.user_id == current_user.id) || (current_user.role == "admin")) %>
-  <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
-<% end %>
+  <!-- If it's a staff chat, then only the creator or an admin can edit it from here. -->
+  <% elsif @chatroom.staff && ((@chatroom.counselor == current_user.id) || (current_user.role == "admin")) %>
+    <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
+  <% end %>
 
-<!-- If private chatroom is not yet claimed by a student or counselor, display form to claim it
-     and complete chat initiation, unless it is a staff chat.-->
-<% if !@chatroom.staff && @chatroom.private && ((!@chatroom.counselor.present? && current_user.role != "student") || (!@chatroom.user_id.present? && current_user.role == "student")) %>
-  <%= render 'update_form' %>
-<% end %>
+  <!-- If private chatroom is not yet claimed by a student or counselor, display form to claim it
+       and complete chat initiation, unless it is a staff chat.-->
+  <% if !@chatroom.staff && 
+        ((!@chatroom.counselor.present? && current_user.role != "student") || 
+        (!@chatroom.user_id.present? && current_user.role == "student")) %>
+            
+        <%= render 'update_form' %>
+  <% end %>
 
-<div class="row col-md-8 col-md-offset-2">
+
   <h1><%= @chatroom.topic %></h1>
 
-  <!-- Private chat: Display patient's online status if counselor -->
-  <% if @chatroom.private && current_user.id == @chatroom.counselor && @chatroom.user_id.present?%> 
-    <% if User.active.online.include? User.find(@chatroom.user_id) %> <h3> Patient is Online </h3><% else %> <h3>Patient is offline </h3>
-    <% end %>
-  <!-- Display online status of patient if user for private chat -->
-  <% elsif @chatroom.private && current_user.id == @chatroom.user_id && @chatroom.counselor.present? %> 
-    <% if User.active.online.include? User.find(@chatroom.counselor) %> <h3> Counselor is Online </h3> <% else %> <h3> Counselor is offline </h3> 
+  <% if !@chatroom.staff %> <!-- No diplay online status if a staff chat -->
+    <!-- Private chat: Display patient's online status if counselor -->
+    <% if current_user.id == @chatroom.counselor && @chatroom.user_id.present?%> 
+      <% if User.active.online.include? User.find(@chatroom.user_id) %> <h3> Patient is Online </h3><% else %> <h3>Patient is offline </h3>
+      <% end %>
+    <!-- Display online status of patient if user for private chat -->
+    <% elsif current_user.id == @chatroom.user_id && @chatroom.counselor.present? %> 
+      <% if User.active.online.include? User.find(@chatroom.counselor) %> <h3> Counselor is Online </h3> <% else %> <h3> Counselor is offline </h3> 
+      <% end %>
     <% end %>
   <% end %>
 
@@ -66,10 +69,12 @@
   <!-- Form to Send Messages -->
   <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
   <% end %>
-</div>
+
 
 <% else %>
 
 <h1> The page you requested does not exist or may be inacccesible. </h1>
 
 <% end %>
+</div>
+</div>

@@ -1,8 +1,6 @@
-<% if emergency %>
-  <h1> title </h1>
-  <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: emergency, staff: staff} %>
-
-<% elsif current_user.role == "student" %>
+<!-- Students filter by anon chat, non anon and archvied -->
+<% if current_user.role == "student"%>
+<!-- All anonymous chats -->
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
@@ -14,10 +12,11 @@
     </div>
     <div id="anon" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-       <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_anon_collection, emergency: emergency, staff: staff} %>
+       <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_anon_collection, emergency: false, staff: false} %>
       </div>
     </div>
   </div>
+  <!-- All non-anonymous chats -->
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
@@ -28,87 +27,99 @@
     </div>
     <div id="nonanon" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_non_anon_collection, emergency: emergency, staff: staff} %>
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_non_anon_collection, emergency: false, staff: false} %>
+      </div>
+    </div>
+  </div>
+  <!-- All tabs except emergency have an archive section -->
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#archive" aria-expanded="true" aria-controls="collapseThree">
+          Archived Chatrooms
+        </a>
+      </h4>
+    </div>
+    <div id="archive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: inactive_chat_collection, emergency: false, staff: false} %>
       </div>
     </div>
   </div>
 
-<% elsif current_user.role == "peer" %>
+<!-- Staff don't filter chats by anon and non-anon -->
+<% elsif current_user.role != "student"%>
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
+    <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#peer" aria-expanded="true" aria-controls="collapseThree">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#active" aria-expanded="true" aria-controls="collapseOne">
           Active Chatrooms
         </a>
       </h4>
     </div>
-    <div id="peer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+    <div id="active" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: emergency, staff: staff} %>
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: false, staff: false} %>
       </div>
     </div>
   </div>
-
-<% elsif current_user.role == "professional" %>
+<!-- All tabs except emergency have an archive section -->
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#archive" aria-expanded="true" aria-controls="collapseTwo">
+          Archived Chatrooms
+        </a>
+      </h4>
+    </div>
+    <div id="archive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: inactive_chat_collection, emergency: false, staff: false} %>
+      </div>
+    </div>
+  </div>
+<!-- All Staff can see Emergency Chatrooms -->
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#emergency" aria-expanded="true" aria-controls="collapseThree">
+          Emergency Chatrooms
+        </a>
+      </h4>
+    </div>
+    <div id="emergency" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: emergency_chat_collection, emergency: true, staff: false} %>
+      </div>
+    </div>
+  </div>
+<!-- All Staff can see Active Staff Chatrooms -->
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingFour">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#professional" aria-expanded="true" aria-controls="collapseFour">
-          Active title
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#activestaff" aria-expanded="true" aria-controls="collapseFour">
+          Active Staff Chatrooms
         </a>
       </h4>
     </div>
-    <div id="professional" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+    <div id="activestaff" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
       <div class="panel-body">
-      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: emergency, staff: staff} %>
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: staff_chat_collection, emergency: false, staff: true} %>
       </div>
     </div>
   </div>
-
-<% elsif current_user.role == "admin" %>
+<!-- All Staff can see Inactive Chatrooms -->
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingFive">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#admin" aria-expanded="true" aria-controls="collapseFive">
-          Active title
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#inactivestaff" aria-expanded="true" aria-controls="collapseFive">
+          Archived Chatrooms
         </a>
       </h4>
     </div>
-    <div id="admin" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+    <div id="inactivestaff" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
       <div class="panel-body">
-      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: emergency, staff: staff} %>
-      </div>
-    </div>
-  </div>
-
-<% elsif staff %>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSix">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#staff" aria-expanded="false" aria-controls="collapseSix">
-          Active title
-        </a>
-      </h4>
-    </div>
-    <div id="staff" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-      <div class="panel-body">
-      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: active_chat_collection, emergency: emergency, staff: staff} %>
-      </div>
-    </div>
-  </div>
-<% end %> <!-- All tabs except emergency have an archive section -->
-
-<% if !emergency %>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSeven">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#archive" aria-expanded="false" aria-controls="collapseSeven">
-          Archived title
-      </h4>
-    </div>
-    <div id="archive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
-      <div class="panel-body">
-      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: inactive_chat_collection, emergency: emergency, staff: staff} %>
+      <%= render partial:"chatrooms/chatroomindex", locals: {chatcollection: inactive_staff_chat_collection, emergency: false, staff: true} %>
       </div>
     </div>
   </div>

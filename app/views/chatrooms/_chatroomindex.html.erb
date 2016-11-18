@@ -6,10 +6,13 @@
         <thead>
           <tr>
             <th>Topic</th>
-            <th>Chat Initiated</th> 
+            <% if !staff %> <!-- Don't need to initiate staff chat -->
+              <th>Chat Initiated</th> 
+            <% end %>
             <% if current_user.role != "student" %> <!-- Staff can see anon/emergency status -->
-              <th> Anonymous </th>
-              <th> Emergency </th>
+              <th> Staff Chat? </th>
+              <th> Anonymous Chat? </th>
+              <th> Emergency Chat? </th>
             <% end %>
             <th colspan="3"></th>
           </tr>
@@ -20,7 +23,7 @@
           <!-- Staff can view emergency/staff chats. Assigned chatroom partners can view chat. 
                Students can view open, private chats with an unclaimed students and counselors can do likewise if there is no counselor -->
           <% if 
-                #View chat is no student/counselor claimed. 
+                #View chat if no student/counselor claimed.
                 (current_user.role != "student" && chatroom.counselor == nil) || 
                 (current_user.role == "student" && chatroom.user_id == nil)   || 
                 #View chat if you're assigned to chat. 
@@ -34,6 +37,7 @@
               <td><%= link_to chatroom.topic, chatroom_path(chatroom) %></td>
 
               <!-- Chat Initiation Status -->
+              <% if !staff %>
               <td>
                 <!-- If you're a student and counselor hasn't claimed yet. -->
                 <% if chatroom.user_id == current_user.id && chatroom.counselor == nil %> 
@@ -60,22 +64,26 @@
                   Chat active with <%= User.find(chatroom.counselor).name %>. 
                 <% end %>
               </td> 
+              <% end %>
 
               <% if current_user.role != "student" %> 
               <!-- If staff can see anon/emergency status -->
                 <td><% if chatroom.anonymous %> Yes <% else %> No <% end %></td>
+                <td><% if chatroom.staff %> Yes <% else %> No <% end %></td>
                 <td><% if chatroom.emergency %> Yes <% else %> No <% end %></td>
               <% end %>
 
-              <td><%= link_to 'Enter Chatroom', chatroom %></td> 
-
-              <% if current_user.role == "admin" || 
-                    current_user.id == chatroom.user_id || 
-                    current_user.id == chatroom.counselor || 
-                    (current_user.role != "student" && chatroom.emergency) %>
-              <!-- Only admin, assigned user and counselor, or staff in emergencies can edit chatroom. Staff can edit all public.-->
-                <td>|<%= link_to 'Edit', edit_chatroom_path(chatroom) %>|</td>
-              <% end %>
+              <td>
+                <%= link_to 'Enter Chatroom', chatroom %> 
+                 <% if current_user.role == "admin" || 
+                      current_user.id == chatroom.user_id || 
+                      current_user.id == chatroom.counselor || 
+                      (current_user.role != "student" && chatroom.emergency) %>
+                  <!-- Only admin, assigned user and counselor, or staff in emergencies can edit chatroom. Staff can edit all public.-->
+                  <hr> 
+                  <%= link_to 'Edit', edit_chatroom_path(chatroom) %>
+                <% end %>
+              </td> 
             </tr>
           <% end %>
           <% end %>

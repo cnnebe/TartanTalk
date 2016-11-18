@@ -22,11 +22,11 @@ class Chatroom < ApplicationRecord
   scope :emergency, -> { where(emergency: true) }
   scope :nonemergency, -> { where(emergency: false) }
 
-  scope :professional, -> {where("counselor_type != ?", 'peer')}
-  scope :peer, -> {where("counselor_type != ?", 'professional')}
+  scope :professional, -> { where("counselor_type != ?", 'peer') }
+  scope :peer, -> { where("counselor_type != ?", 'professional') }
 
-  scope :staff, -> {where(staff: true)}
-  scope :nonstaff, -> {where(staff: false)}
+  scope :staff, -> { where(staff: true )}
+  scope :nonstaff, -> { where(staff: false) }
 
   def to_param
     self.slug
