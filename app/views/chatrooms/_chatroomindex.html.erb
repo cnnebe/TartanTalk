@@ -10,8 +10,8 @@
               <th>Chat Initiated</th> 
             <% end %>
             <% if current_user.role != "student" %> <!-- Staff can see anon/emergency status -->
-              <th> Staff Chat? </th>
               <th> Anonymous Chat? </th>
+              <th> Staff Chat? </th>
               <th> Emergency Chat? </th>
             <% end %>
             <th colspan="3"></th>
