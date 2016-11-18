@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20161106002121) do
     t.integer  "counselor"
     t.boolean  "active",         default: true
     t.boolean  "staff",          default: false
-    t.boolean  "private",        default: true
     t.boolean  "emergency",      default: false
     t.boolean  "anonymous",      default: false
     t.integer  "user_id"
