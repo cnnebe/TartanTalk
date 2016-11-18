@@ -28,16 +28,8 @@
   </li> 
 
   <% if logged_in? && current_user.role == "admin" %>
-  <li>
-    <div class="dropdown">
-    <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">Staff
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li> <%= link_to "View all Staff", staffs_path %></li>
-      <li> <%= link_to "Add New Counselor", new_staff_path %></li>
-    </ul>
-    </div>
-  </li>
+    <li> <%= link_to "View all Staff", staffs_path %></li>
+    <li> <%= link_to "Add New Counselor", new_staff_path %></li>
   <% end %>
 </ul>
 
