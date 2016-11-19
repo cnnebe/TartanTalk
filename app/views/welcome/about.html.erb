@@ -29,7 +29,7 @@
           <ul class="actions">
             <% if current_user %>
                 <li>
-                  <%= link_to "Log Out", logout_path, class: "button",method: "delete" %>
+                  <%= link_to "Log Out","/signout", id: "log_out", class: "button"%>
                   <% if logged_in? %>
                   <li><a href="/chatrooms" class="button">View your Chatrooms</a></li>
                   <% end %>
