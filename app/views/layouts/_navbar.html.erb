@@ -1,34 +1,43 @@
 <!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
+        <!-- Sidebar -->
+    <%= stylesheet_link_tag 'application', "application.css" %>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                  <img src="/images/Logo.png" alt="icon" 
+                  style="width:100%;height:auto">
+                  <h2><%= current_user.name %></h2>
+                  <h5><%= current_user.role %></h5>
+                  <a><%= link_to "Edit Profile",profile_path(current_user.id), class: "button"%></a>
+            </ul>
+        </div>
 
-<link href="css/navbar-fixed-side.css" rel="stylesheet" />
 
-
+    <div class="col-sm-2">
       <nav class="navbar navbar-default navbar-fixed-side">
-        <!-- normal collapsible navbar markup -->
+            <!-- normal collapsible navbar markup -->
             <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header" style="background-color:#CEE6E1">
            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="navbar-brand" data-turbolinks="false">Tartan Talk</a>.
+          <a href="/" class="navbar-brand" data-turbolinks="false" >Tartan Talk</a>.
          
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
+      <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <%= render partial: 'layouts/navbar_links' %>
         </div><!-- /.navbar-collapse -->
 
       </nav>
 
+      </nav>
+    </div>
 
 
 
-<!-- <nav class="navbar navbar-default">
-  <div class="container-fluid">
 
-  </div>
-</nav> -->
