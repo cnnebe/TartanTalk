@@ -1,13 +1,17 @@
 <% if logged_in? %>
+
 <div class="chatroom-form">
 <div class="container"> 
-<div class="row centered-form">
-  <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-  <div class="card card-container">
-  <div class="well">
+  <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+  <br><br>
+    <div class="panel panel-main">
+      <div class="panel-heading">
+      <legend><%= controller.action_name.capitalize %> Chatroom</legend>
+      </div>
+    <div class="panel-body">
     <%= simple_form_for @chatroom, html: { class: 'form-horizontal' } do |f| %>
     <fieldset>
-    <legend><%= controller.action_name.capitalize %> Chatroom</legend>
+    
       <%= f.input :topic, input_html: {class: "avg"}, label: "Chat Name or Topic: " %> <br>
       <%= f.input :anonymous, as: :boolean,  label: "Anonymous Chat" %> 
       <p> Your random username is used if you select anonymous instead of your name/andrew ID. </p> <br>
@@ -43,8 +47,7 @@
     </fieldset>
     <% end %>
   </div>
-  </div>
-  </div>
+  </div> 
 </div>
 </div>
 </div>

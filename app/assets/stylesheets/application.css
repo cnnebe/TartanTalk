@@ -1,8 +1,126 @@
 body {
     overflow-x: hidden;
     margin-bottom:50px;
- }
+    color: rgba(255, 255, 255, 1);
+    background-color: white;
+    color: #4A4A4A;
+}
 
+/* css modified from admin template */
+.btn-primary {
+    background: #312251;
+    border-color: white;
+    text-align: center;
+    display:block; /* change this from inline-block */
+    width:40%; /* setting the width */
+    margin:0 auto; /* this will center  it */
+    position:relative;
+}
+.btn-outline {
+  color: inherit;
+  background-color: transparent;
+  transition: all .5s;
+}
+.btn-primary.btn-outline {
+  color: #428bca;
+}
+.btn-success.btn-outline {
+  color: #5cb85c;
+}
+.btn-info.btn-outline {
+  color: #5bc0de;
+}
+.btn-warning.btn-outline {
+  color: #f0ad4e;
+}
+.btn-danger.btn-outline {
+  color: #d9534f;
+}
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+  color: white;
+}
+.chat {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chat li {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #999999;
+}
+.chat li.left .chat-body {
+  margin-left: 60px;
+}
+.chat li.right .chat-body {
+  margin-right: 60px;
+}
+.chat li .chat-body p {
+  margin: 0;
+}
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+  margin-right: 5px;
+}
+.chat-panel .panel-body {
+  height: 350px;
+  overflow-y: scroll;
+}
+.panel{
+    margin: 2%;
+    padding: 2%;
+    box-shadow: 0 0 15px black;
+}
+
+
+.panel-main {
+  border-color: white
+}
+.panel-main > .panel-heading {
+  background: #CEE6E1;
+  border: 2px solid #D8D8D8;
+  color: #4A4A4A;
+  text-align: center;
+  font-size: 50px;
+}
+.panel-main > a {
+  color: #312251;
+}
+.panel-main > a:hover {
+  color: #3d8b3d;
+}
+.panel-red {
+  border-color: #d9534f;
+}
+.panel-red > .panel-heading {
+  border-color: #d9534f;
+  color: white;
+  background-color: #d9534f;
+}
+.panel-red > a {
+  color: #d9534f;
+}
+.panel-red > a:hover {
+  color: #b52b27;
+}
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+.panel-yellow > .panel-heading {
+  border-color: #f0ad4e;
+  color: white;
+  background-color: #f0ad4e;
+}
+.panel-yellow > a {
+  color: #f0ad4e;
+}
+.panel-yellow > a:hover {
+  color: #df8a13;
+}
 #footer{
     position:fixed;
     height:50px;
@@ -13,7 +131,11 @@ body {
     margin-bottom:0px;
 }
 
+/*  end of css modified from admin template */
 
+#footer a{
+    color: white;
+}
 
 /* nav and side bar content */
 @media (max-width: 768px){

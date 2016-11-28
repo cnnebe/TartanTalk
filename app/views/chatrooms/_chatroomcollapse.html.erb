@@ -2,7 +2,7 @@
 <% if current_user.role == "student"%>
 <!-- All anonymous chats -->
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#anon" aria-expanded="true" aria-controls="collapseOne">
@@ -17,7 +17,7 @@
     </div>
   </div>
   <!-- All non-anonymous chats -->
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#nonanon" aria-expanded="true" aria-controls="collapseTwo">
@@ -32,7 +32,7 @@
     </div>
   </div>
   <!-- All tabs except emergency have an archive section -->
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#archive" aria-expanded="true" aria-controls="collapseThree">
@@ -49,7 +49,7 @@
 
 <!-- Staff don't filter chats by anon and non-anon -->
 <% elsif current_user.role != "student"%>
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#active" aria-expanded="true" aria-controls="collapseOne">
@@ -64,7 +64,7 @@
     </div>
   </div>
 <!-- All tabs except emergency have an archive section -->
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#archive" aria-expanded="true" aria-controls="collapseTwo">
@@ -79,7 +79,7 @@
     </div>
   </div>
 <!-- All Staff can see Emergency Chatrooms -->
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#emergency" aria-expanded="true" aria-controls="collapseThree">
@@ -109,7 +109,7 @@
     </div>
   </div>
 <!-- All Staff can see Inactive Chatrooms -->
-  <div class="panel panel-default">
+  <div class="panel panel-main">
     <div class="panel-heading" role="tab" id="headingFive">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#inactivestaff" aria-expanded="true" aria-controls="collapseFive">

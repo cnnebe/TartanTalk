@@ -1,4 +1,6 @@
 <!-- Source: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
+
+           
 <%=form_for message, remote: true, authenticity_token: true do |f|%>
   <%= f.label :your_message%>:
   <%= f.text_area :content, class: "form-control", data: {textarea: "message"}%>
