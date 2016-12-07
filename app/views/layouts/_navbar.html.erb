@@ -1,7 +1,10 @@
 <!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
         <!-- Sidebar -->
-    <%= stylesheet_link_tag 'application', "application.css" %>
-    
+
+<% if current_user %>  
+
+<%= stylesheet_link_tag '_navbar', "side_bar.css" %>
+
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -13,7 +16,7 @@
                   <a><%= link_to "Edit Profile",profile_path(current_user.id), class: "btn btn-primary"%></a>
             </ul>
         </div>
-
+<% end %>
 
     <div class="col-sm-2">
       <nav class="navbar navbar-default navbar-fixed-side">
@@ -38,6 +41,7 @@
 
       </nav>
     </div>
+
 
 
 

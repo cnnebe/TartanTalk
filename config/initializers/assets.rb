@@ -9,6 +9,7 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 Rails.application.config.assets.precompile += %w( main.css )
 Rails.application.config.assets.precompile += %w( application.css )
+Rails.application.config.assets.precompile += %w( side_bar.css )
 Rails.application.config.assets.precompile += %w( jquery.min.js )
 Rails.application.config.assets.precompile += %w( jquery.scrollex.min.js )
 Rails.application.config.assets.precompile += %w( jquery.scrolly.min.js )

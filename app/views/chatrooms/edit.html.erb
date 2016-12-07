@@ -4,8 +4,12 @@
     <%= render partial: 'layouts/navbar' %>
 
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+
+        <br><br><br>
             <div class="card card-container">
             <div class="well">
+
+
             <!-- Staff can edit staff chats. Only user/counselor in a chat can edit -->
             <% if logged_in? && ((@chatroom.staff && current_user.role != "student") || (current_user.id == @chatroom.counselor || current_user.id == @chatroom.user_id))%>
             	<h1>Editing Chatroom: <%= @chatroom.topic %></h1>

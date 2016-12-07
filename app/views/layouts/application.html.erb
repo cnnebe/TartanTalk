@@ -17,19 +17,31 @@
     <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= favicon_link_tag 'Logo-red.png' %>
+    <%= stylesheet_link_tag 'application', "application.css" %>
+
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" /> -->
   </head>
 
   <body>
+
+
     <div class="container-fluid">
       <div class="row centered-form">
         <div id="wrapper">
           <%= yield %>
+
+
+          <% if current_user %>
           <%= render partial: 'layouts/footer' %>
+          <% end %>
+          
         </div>
       </div>
     </div> 
+
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
