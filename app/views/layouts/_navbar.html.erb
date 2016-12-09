@@ -8,11 +8,10 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                  <img src="/images/Logo.png" alt="icon" 
-                  style="width:100%;height:auto;float: center">
-                  <h2><%= current_user.name %></h2>
-                  <h5><%= current_user.role %></h5>
+                  <img src="../scot.jpg" alt="Avatar">
+                  <h2 style="text-align: center"><%= current_user.name %></h2>
+                  <h5 style="text-align: center"><%= current_user.role %></h5>
+                  <br>
                   <a><%= link_to "Edit Profile",profile_path(current_user.id), class: "btn btn-primary"%></a>
             </ul>
         </div>

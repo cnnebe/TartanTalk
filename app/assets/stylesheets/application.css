@@ -4,18 +4,24 @@ body {
     color: rgba(255, 255, 255, 1);
     background-color: white;
     color: #4A4A4A;
-}
 
-/* css modified from admin template */
+}
+.jumbotron{
+  border-radius: 16px 16px 16px 16px;
+  -moz-border-radius: 16px 16px 16px 16px;
+  -webkit-border-radius: 16px 16px 16px 16px;
+background: #CEE6E1
+}
 .btn-primary {
     background: #312251;
     border-color: white;
     text-align: center;
     display:block; /* change this from inline-block */
-    width:40%; /* setting the width */
+    width: auto; /* setting the width */
     margin:0 auto; /* this will center  it */
     position:relative;
 }
+
 .btn-outline {
   color: inherit;
   background-color: transparent;
@@ -43,6 +49,61 @@ body {
 .btn-danger.btn-outline:hover {
   color: white;
 }
+.nav-tabs{
+  background-color:#312251;
+  border-radius: 24px 24px 24px 24px;
+-moz-border-radius: 24px 24px 24px 24px;
+-webkit-border-radius: 24px 24px 24px 24px;
+border: 3px hidden #000000;
+}
+.tab-content{
+    color:black;
+    padding:2%
+}
+.nav-tabs > li > a{
+  border: medium none;
+  color: white;
+}
+.nav-tabs > li > a:hover{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+.well{
+    background: #CEE6E1;
+    text-align: center;
+    border-color: none;
+    font-size: 18px;
+    margin-top: 2%;
+    margin-right: 5%;
+    padding: 10%;
+-webkit-box-shadow: 7px 17px 29px -11px rgba(0,0,0,0.75);
+-moz-box-shadow: 7px 17px 29px -11px rgba(0,0,0,0.75);
+box-shadow: 7px 17px 29px -11px rgba(0,0,0,0.75);
+border-radius: 0px 0px 0px 0px;
+-moz-border-radius: 0px 0px 0px 0px;
+-webkit-border-radius: 0px 0px 0px 0px;
+border: 9px double #f5f0f5;
+}
+
+.well-two{
+    width: 100%;
+    background: #CEE6E1;
+    border-color: none;
+    font-size: 18px;
+    margin-top: 2%;
+    margin-right: 5%;
+    padding: 10%;
+-webkit-box-shadow: 7px 17px 29px -11px rgba(0,0,0,0.75);
+-moz-box-shadow: 7px 17px 29px -11px rgba(0,0,0,0.75);
+box-shadow: 7px 17px 29px -11px rgba(0,0,0,0.75);
+border-radius: 11px 29px 29px 14px;
+-moz-border-radius: 11px 29px 29px 14px;
+-webkit-border-radius: 11px 29px 29px 14px;
+border: 3px double #f5f2f5;
+}
+
 .chat {
   margin: 0;
   padding: 0;
@@ -73,12 +134,13 @@ body {
 .panel{
     margin: 2%;
     padding: 2%;
-    box-shadow: 0 0 15px black;
 }
 
 
 .panel-main {
   border-color: white
+  box-shadow: 0 0 15px black;
+
 }
 .panel-main > .panel-heading {
   background: #CEE6E1;
@@ -91,6 +153,26 @@ body {
   color: #312251;
 }
 .panel-main > a:hover {
+  color: #3d8b3d;
+}
+.panel-red {
+  border-color: #d9534f;
+}
+
+.panel-login {
+  border-color: #e6e6e6;
+  border-radius: 5px;
+  min-height: 325px;
+}
+.panel-login > .panel-heading {
+  background:   #CEE6E1;
+  color: #4A4A4A;
+  font-size: 50px;
+}
+.panel-login > a {
+  color: #312251;
+}
+.panel-login > a:hover {
   color: #3d8b3d;
 }
 .panel-red {

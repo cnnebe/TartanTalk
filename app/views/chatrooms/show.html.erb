@@ -1,13 +1,13 @@
 <%= render partial: 'layouts/navbar' %>
+<div class="container"> 
 <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+
 <%= render partial: 'layouts/flash_success' %>
-</div>
 
 <!-- You must be the counselor or user assigned to the room. 
      If there is no user assigned, any user can view until its claimed. 
      If there is no counselor assigned, any counselor can view until its claimed. -->
-<div class="container"> 
-<div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+
 <% if (@chatroom.staff && current_user.role != "student") || (current_user.id == @chatroom.user_id) || (current_user.id == @chatroom.counselor) || ((@chatroom.counselor == nil) && (current_user.role != "student")) || ((@chatroom.user_id == nil) && (current_user.role == "student")) %>
 
   <!-- If chatroom is an emergency. Display emergency information if you're a student. -->
@@ -70,6 +70,8 @@
   <% if @chatroom.active %>
   <!-- Form to Send Messages -->
   <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
+
+  <br><br><br>
   <% end %>
 
 

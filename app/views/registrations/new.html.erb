@@ -1,8 +1,14 @@
 <!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
 <%= render partial: 'layouts/navbar' %>
-<% if !logged_in? %>
-<h2> 
 
+<div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-2 col-md-offset-2">
+
+<% if !logged_in? %>
+<br>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+  <h1>Terms of Use</h1>
+  <h5> 
         By using this service you agree to the terms of service and privacy policy. The important parts are summarized below. 
 
 
@@ -26,43 +32,67 @@
         Things like depression, consistent stress, or the need for multiple chat sessions are best done by signing in via your andrew account through Google. 
 
 
-        If you would like more information, please check out our FAQ. For more information about CaPS, see the following:
-        http://www.cmu.edu/counseling/resources/index.html
-        http://www.cmu.edu/counseling/about-us/index.html
+        If you would like more information, please check out our FAQ. For more information about CaPS, see the following:  </h5>
+        <br>
+        <a class="btn btn-info btn-lg" href="http://www.cmu.edu/counseling/resources/index.html" role="button" style="width:40%;float: left"> CMU Counseling Resources </a>
+        <a class="btn btn-warning btn-lg" href="http://www.cmu.edu/counseling/about-us/index.html" role="button" style="width:40%;float: left"> CMU Counseling About </a>
 
-       </h2>
-  <div class="container"> 
-  <div class="row centered-form">
-  <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-    <div class="card card-container">
-    <div class="well">
-      <h2 id="log-in-title">Chat Anonymously</h2>
-      <h3> <i> One time use account gives you a random username that you can use for anonymous chat. Skips Google Authentication. </i> </h3>
+  </div>
+</div>
+<hr style="width: 60%"">
+            <div class="col-xs-12 col-md-6">
+                <div class="panel panel-login text-center">
+                    <div class="panel-heading">
+                        <span class="fa-stack fa-1x">
+                              <i class="fa fa-circle fa-stack-2x text-black"></i>
+                              <i class="fa fa-user-secret fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                    <span><h4 id="log-in-title">Want to Chat Anonymously
+                      <button id="ibutton" type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal"> 
+                        <i class="fa fa-question"></i>
+                      </button>
+                    </h4></span>
 
-      <p> Your Andrew ID confirms that you're a CMU student. If you create or enter an anonymous chat, no one you chat with will be able to view your Andrew ID during the chat unless you choose to reveal it. </p>
+                        <div class="auth-form ">
+                          <%= form_for(User.new, url: signup_path) do |f| %>
+                            <%=f.label :name, "Enter your Andrew ID"%>
+                            <div class="input-group">
+                              <span class="input-group-addon">@</span>
+                                <%= f.text_field :name, class: "form-control", :required => true%>
+                            </div>
+                            <div class="actions">
+                              <%= f.submit "sign up", class: "btn btn-info" %>
+                            </div>
+                          <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div class="auth-form well">
-      <%= form_for(User.new, url: signup_path) do |f| %>
-        <%=f.label :name, "Enter your Andrew ID"%>
-        <div class="input-group">
-          <span class="input-group-addon">@</span>
-            <%= f.text_field :name, class: "form-control", :required => true%>
-        </div>
-        <div class="actions">
-          <%= f.submit "sign up", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-      <!-- Source: https://richonrails.com/articles/google-authentication-in-ruby-on-rails -->
-       <h3> <i>Signing with Google stills allows you to be anonymous while allowing for continous
-       interaction with a counselor. You will have access to all chats this way. </i> </h3>
-       <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-      </div>
-        <%= render partial: 'layouts/flash_errors'%>
-    </div>
-    </div>
-  </div>
-  </div>
-  </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="panel panel-login text-center">
+                    <div class="panel-heading">
+                        <span class="fa-stack fa-1x">
+                              <i class="fa fa-circle fa-stack-2x text-black"></i>
+                              <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <h4>Sign in With Google</h4>
+                             <!-- Source: https://richonrails.com/articles/google-authentication-in-ruby-on-rails -->
+                        <div class="auth-form ">
+
+                         <h5> <i>Signing with Google stills allows you to be anonymous while allowing for continous
+                         interaction with a counselor. You will have access to all chats this way. </i> </h5>
+                         <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", class:"btn btn-info" %>
+                        </div>
+                         <%= render partial: 'layouts/flash_errors'%>
+                    </div>
+                </div>
+            </div>
+
 
 <% else %> 
 <!-- Don't show signup if already logged in    -->
@@ -70,3 +100,24 @@
   <center><h1> You are already logged in! </h1></center>
   <a href="/" class="navbar-brand" data-turbolinks="false">Return to Tartan Talk</a>.
 <% end %>
+
+                        <!-- modal -->
+                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel"> <i> This is a one time use account. We give you a random username that you can use for anonymous chats. This also allows you to skip Google Authentication. </i> </h4>
+                                    </div>
+                                    <div class="modal-body" style="background:#CEE6E1">
+                                      <p> It is important to note that when you enter your Andrew ID all it does is confirms that you're in fact a CMU student. So, when you create or enter an anonymous chat, no one you chat with will be able to view your Andrew ID during the chat unless you choose to reveal it. </p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+</div>
