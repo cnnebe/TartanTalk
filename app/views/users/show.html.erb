@@ -1,15 +1,15 @@
 <%= render partial: 'layouts/navbar' %> <!-- Display Navbar on all pages -->
-    <div class="row form">
+    <div class="row ">
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
 
             <div class="card hovercard">
                 <div class="cardheader"></div>
                 <div class="avatar">
-                    <img alt="" src="http://lorempixel.com/100/100/people/9/">
+                    <img alt="" src="#">
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href="#" class="label label-info">  Account Information  </a>
+                        <h3 class="label label-info">  Account Information  </h3>
                     <hr class="style13">
                     </div>
                         <% if logged_in? && (current_user.role == 'admin' || current_user.id == @user.id) %>
@@ -29,4 +29,4 @@
                 </div>
             </div>
         </div>
-    </div>  <!-- this is the last div, even if you delete the card, don't delete this >
+    </div>  <!-- this is the last div, even if you delete the card, don't delete this -->

@@ -54,7 +54,7 @@
     <% end %>
   <% end %>
 
-  <div class="panel panel-default"> <!-- Display Messages -->
+  <div class="panel"> <!-- Display Messages -->
     <% if @chatroom.messages.any? %>
       <div class="panel-body" id="messages">
         <%= render partial: 'messages/message', collection: @chatroom.messages%>
@@ -68,8 +68,6 @@
   <% if @chatroom.active %>
   <!-- Form to Send Messages -->
   <%= render partial: 'messages/message_form', locals: {message: @message, chatroom: @chatroom}%>
-
-  <br><br><br>
   <% end %>
 
 

@@ -1,6 +1,3 @@
 <!-- Adapted from: https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable -->
 <!-- Only display anon username if student. Counselors cant be anon -->
-
-
 <p><strong> <%if message.chatroom.anonymous && current_user.role == "student"%> <%=message.display_anon%> <%else%> <%=message.display_name%> <%end%>:</strong> <%=message.content%></p>
-
