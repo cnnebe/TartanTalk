@@ -1,5 +1,5 @@
 <%= render partial: 'layouts/navbar' %>
-<div class="container"> 
+
 <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
 
 <%= render partial: 'layouts/flash_success' %>
@@ -12,26 +12,24 @@
 
   <!-- If chatroom is an emergency. Display emergency information if you're a student. -->
   <% if current_user.role == "student" && @chatroom.emergency %>
-  <div class="container">
   <div class="jumbotron">
     <h2>Carnegie Mellon students in distress or experiencing a crisis should call 412-268-2922 immediately. </h2>  
-    <h3> During CaPS regular hours, Monday through Friday from 8:30 a.m. to 4 p.m., you can stop by to be screened for a same-day, urgent appointment.  After hours, you can call our main number 412-268-2922 to speak immediately with a phone counselor. </h3>
+    <h4> During CaPS regular hours, Monday through Friday from 8:30 a.m. to 4 p.m., you can stop by to be screened for a same-day, urgent appointment.  After hours, you can call our main number 412-268-2922 to speak immediately with a phone counselor. </h4>
     <p></p>
     <p><a class="btn btn-primary btn-lg" href="http://www.cmu.edu/counseling/get-support/suicide-prevention-for-yourself.html" role="button">Having Suicidal Thoughts?</a></p>
-  </div>
   </div>
 
   <% end %>
 
   <!-- Only the assigned user and counselor can access edit from here -->
   <% if ((@chatroom.user_id == current_user.id) || (@chatroom.counselor == current_user.id)) %>
-    <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
+    <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom), class:"btn btn-warning" %> 
 
   <!-- If it's a staff chat, then only the creator or an admin can edit it from here. -->
   <% elsif @chatroom.staff && ((@chatroom.counselor == current_user.id) || (current_user.role == "admin")) %>
-    <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom) %> 
+    <%= link_to 'Edit Chatroom', edit_chatroom_path(@chatroom), class:"btn btn-warning" %> 
   <% end %>
-
+  <hr>
   <!-- If private chatroom is not yet claimed by a student or counselor, display form to claim it
        and complete chat initiation, unless it is a staff chat.-->
   <% if !@chatroom.staff && 
@@ -81,4 +79,4 @@
 
 <% end %>
 </div>
-</div>
+

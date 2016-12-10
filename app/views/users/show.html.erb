@@ -1,26 +1,32 @@
 <%= render partial: 'layouts/navbar' %> <!-- Display Navbar on all pages -->
-<div class="container"> 
-    <div class="row centered-form">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-            <div class="card card-container">
-            <div class="well">
-            <% if logged_in? && (current_user.role == 'admin' || current_user.id == @user.id) %>
-            	<h2>Account Information</h2> <br>
-            	<p> <b>Name or Andrew ID (shows up during non-anonymous chat):</b> <br><%= @user.name %> </p> <br>
-            	<p> <b>Username (shows up during anonymous chat): </b> <br><%= @user.username %> </p> <br> 
+    <div class="row form">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
 
-            	<% if current_user.role == 'admin' %> <!-- Admin can see if user is active -->
-            		<p> <b> Active Account: </b> <%= @user.active %> </p> <br> <br>
-            	<% end %>
+            <div class="card hovercard">
+                <div class="cardheader"></div>
+                <div class="avatar">
+                    <img alt="" src="http://lorempixel.com/100/100/people/9/">
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a target="_blank" href="#" class="label label-info">  Account Information  </a>
+                    <hr class="style13">
+                    </div>
+                        <% if logged_in? && (current_user.role == 'admin' || current_user.id == @user.id) %>
+                            <p> <b>Name or Andrew ID (shows up during non-anonymous chat):</b> <br><%= @user.name %> </p> <br>
+                            <p> <b>Username (shows up during anonymous chat): </b> <br><%= @user.username %> </p> <br> 
 
-            	<%= render 'update_form' %> <!-- Allows account owner/admin to edit -->
+                            <% if current_user.role == 'admin' %> <!-- Admin can see if user is active -->
+                                <p> <b> Active Account: </b> <%= @user.active %> </p> <br> <br>
+                            <% end %>
 
-            <% else %>
-				<h1> The page you are looking for does not exist or may be inaccessible. </h1>
+                            <%= render 'update_form' %> <!-- Allows account owner/admin to edit -->
 
-			<% end %>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
+                        <% else %>
+                            <h1> The page you are looking for does not exist or may be inaccessible. </h1>
+
+                        <% end %>
+                </div>
+            </div>
+        </div>
+    </div>  <!-- this is the last div, even if you delete the card, don't delete this >

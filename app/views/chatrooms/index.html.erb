@@ -1,8 +1,8 @@
 <%= render partial: 'layouts/navbar' %>
-<div class="container"> 
 <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
 <% if logged_in? %>
 <h1>Your Chatrooms</h1>
+<hr class="style15">
 <%= render partial: 'layouts/flash_success'%>
   <!-- Admin sees all chats, staff and emergency -->
   <% if current_user.role == "admin" %>
@@ -36,5 +36,5 @@
   <h1> The page you requested does not exist or may be inaccessible. </h1>
 <% end %>
 </div>
-</div>
+
 
