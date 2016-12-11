@@ -7,10 +7,13 @@
 
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
+                <br><br>
                 <li class="sidebar-brand">
-                  <img src="../scot.jpg" alt="Avatar">
+                  <!--<img src="/images/avatar.png" alt="Avatar"> -->
+                </li>
                   <h2 style="text-align: center"><%= current_user.name %></h2>
                   <h5 style="text-align: center"><%= current_user.role %></h5>
+                  <br>
                   <center><a><%= link_to "Edit Profile",profile_path(current_user.id), class: "btn btn-primary", style:"width:85%;border:white"%></a><center>
             </ul>
         </div>

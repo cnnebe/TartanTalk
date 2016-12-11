@@ -218,7 +218,7 @@ hr.style16:before {
   border-radius: 16px 16px 16px 16px;
   -moz-border-radius: 16px 16px 16px 16px;
   -webkit-border-radius: 16px 16px 16px 16px;
-background: #CEE6E1
+background: #d4f7ef
 }
 
 /*  btn styling */
@@ -445,7 +445,7 @@ border: 3px double #f5f2f5;
   padding: 2%;
 }
 .panel-login > .panel-heading {
-  background:   #CEE6E1;
+  background: #d4f7ef;
   color: #4A4A4A;
   font-size: 50px;
 }

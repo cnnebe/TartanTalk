@@ -2,7 +2,6 @@
 <%= render partial: 'layouts/navbar' %>
 <div class="row centered-form">
 <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
-  <div class="well">
     <div class="auth-form well">
       <!-- Options if already logged in -->
       <% if current_user %>
@@ -15,7 +14,6 @@
         <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", class: "btn btn-primary" %>
       <% end %>
       </div>
-  </div>
   </div>
 </div>
   <%= render partial: 'layouts/flash_errors'%>
