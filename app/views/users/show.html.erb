@@ -1,17 +1,13 @@
 <%= render partial: 'layouts/navbar' %> <!-- Display Navbar on all pages -->
-    <div class="row ">
+        
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
-
-            <div class="card hovercard">
-                <div class="cardheader"></div>
-                <div class="avatar">
-                    <img alt="" src="#">
-                </div>
-                <div class="info">
-                    <div class="title">
-                        <h3 class="label label-info">  Account Information  </h3>
-                    <hr class="style13">
-                    </div>
+        <br><br>
+                <div class="panel panel-profile text-center">
+                            <span class="fa-stack fa-4x">
+                                  <i class="fa fa-circle fa-stack-2x text-black"></i>
+                                  <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                            </span>
+                    <br><br><br>
                         <% if logged_in? && (current_user.role == 'admin' || current_user.id == @user.id) %>
                             <p> <b>Name or Andrew ID (shows up during non-anonymous chat):</b> <br><%= @user.name %> </p> <br>
                             <p> <b>Username (shows up during anonymous chat): </b> <br><%= @user.username %> </p> <br> 
@@ -27,6 +23,10 @@
 
                         <% end %>
                 </div>
+
             </div>
-        </div>
-    </div>  <!-- this is the last div, even if you delete the card, don't delete this -->
+
+
+
+
+  <!-- this is the last div, even if you delete the card, don't delete this -->

@@ -1,8 +1,6 @@
 <%= render partial: 'layouts/navbar' %>
-<div class="container"> 
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
-            <div class="card card-container">
             <div class="well">
             <% if logged_in? && (current_user.role == "admin" || current_user.id == @staff.user.id) %>
             	<h1>Editing Counselor: <%= @staff.user.role %> <%= @staff.user.name %></h1>
@@ -10,9 +8,7 @@
             <% else %>
             	<h1> The page you requested does not exist or may be inaccessible.</h1>
             <% end %>
-			<%= link_to 'Back to Staff Profile', @staff %> | <%= link_to 'Back to Staff Listing', staffs_path %>
-			</div>
+			<%= link_to 'Back to Staff Profile', @staff, class:"btn btn-pink" %> | <%= link_to 'Back to Staff Listing', staffs_path, class:"btn btn-primary" %>
 			</div>
 		</div>
 	</div>
-</div>

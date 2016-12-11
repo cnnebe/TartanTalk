@@ -1,8 +1,10 @@
 <%= render partial: 'layouts/navbar' %>
 <%= render partial: 'layouts/flash_success'%>
 <% if logged_in? %>
+
   <!-- Nav tabs -->
   <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+  <br><br>
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All Counselors</a></li>
     <li role="presentation"><a href="#professional" aria-controls="professional" role="tab" data-toggle="tab">Professional Counselors</a></li>
@@ -12,7 +14,6 @@
   <div class="container"> 
   <div class="row centered-form">
   <div class="col-xs-12 col-sm-8 col-md-8">
-  <div class="card card-container">
   <div class="well-two">
 
     <!-- Tab panes -->
@@ -34,7 +35,6 @@
 <% else %>
   <h1> The page you requested does not exist or may be inaccessible. </h1>
 <% end %>
-  </div>
   </div>
   </div>
   </div>

@@ -1,7 +1,6 @@
 <% if logged_in? %>
 
 <div class="chatroom-form">
-<div class="container"> 
   <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
   <br><br>
     <div class="panel panel-main">
@@ -40,7 +39,7 @@
       <% if current_user.role != "student" %>
         <%= f.input :staff, as: :boolean, label: "Staff Only Chat?" %> <br>
       <% end %>
-
+      <hr>
       <div class="form-actions">
         <center><%= f.submit 'Create Chatroom', :class => 'btn btn-primary'%></center>
       </div>   
@@ -48,7 +47,6 @@
     <% end %>
   </div>
   </div> 
-</div>
 </div>
 </div>
 

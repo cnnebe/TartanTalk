@@ -56,7 +56,7 @@
 
 <br>
 <% if current_user.role == "admin" %> <!-- Only admin can add new staff -->
-  <%= link_to 'Add New Counselor', new_staff_path %>
+  <%= link_to 'Add New Counselor', new_staff_path, class: "btn btn-green" %>
 <% end %>
       
      

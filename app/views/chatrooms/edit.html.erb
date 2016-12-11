@@ -6,7 +6,6 @@
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
 
         <br><br><br>
-            <div class="card card-container">
             <div class="well">
 
 
@@ -17,7 +16,8 @@
             <% else %>
             	<h1> The page you requested does not exist or may be inaccessible.</h1>
             <% end %>
-			<%= link_to 'Back to Chatroom', @chatroom %> | <%= link_to 'Back to all Available Chatrooms', chatrooms_path %>
+            <br>
+			<%= link_to 'Back to Chatroom', @chatroom, class:"btn btn-blue"%> | <%= link_to 'Back to all Available Chatrooms', chatrooms_path, class:"btn btn-pink" %>
 			</div>
 			</div>
-		</div>
+

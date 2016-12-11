@@ -1,27 +1,29 @@
 <%= render partial: 'layouts/navbar' %>
-<div class="container"> 
-  <div class="col-xs-12 col-sm-11 col-md-11 ">
+
+<div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+<br>
   <% if logged_in? && current_user.role != "student" %>
     <% if @active_users.empty? %>
       <h4>No active users at this time.</h4>
     <% else %>
       <h4>Active Users</h4>
+      <hr class="style15">
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>Online</th>
+            <tr class="style2">
+              <th class="style2">Name</th>
+              <th class="style2">Username</th>
+              <th class="style2">Role</th>
+              <th class="style2">Online</th>
             </tr>
           </thead>
           <tbody>
             <% @active_users.each do |user| %>
-              <tr>
-                <td><%= link_to user.name, user_path(user) %></td>
-                <td><%=user.username %></td>
-                <td><%= user.role %></td>
-                <td><%= @online_users.include? user %></td>
+              <tr class="style2">
+                <td class="style2"><%= link_to user.name, user_path(user) %></td>
+                <td class="style2"><%=user.username %></td>
+                <td class="style2"><%= user.role %></td>
+                <td class="style2"><%= @online_users.include? user %></td>
               </tr>
             <% end %>
           </tbody>
@@ -35,20 +37,21 @@
       <h4>No inactive users at this time.</h4>
     <% else %>
       <h4>Inactive Users</h4>
+        <hr class="style15">
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Role</th>
+            <tr class="style2">
+              <th class="style2">Name</th>
+              <th class="style2">Username</th>
+              <th class="style2">Role</th>
             </tr>
           </thead>
           <tbody>
             <% @inactive_users.each do |user| %>
-              <tr>
-                <td><%= link_to user.name, user_path(user) %></td>
-                <td><%=user.username %></td>
-                <td><%= user.role %></td>
+              <tr class="style2">
+                <td class="style2"><%= link_to user.name, user_path(user) %></td>
+                <td class="style2"><%=user.username %></td>
+                <td class="style2"><%= user.role %></td>
               </tr>
             <% end %>
           </tbody>
@@ -61,4 +64,4 @@
   <h1> The page you are looking for does not exist or may be inaccessible. </h1>
   <% end %>
   </div>
-</div>
+

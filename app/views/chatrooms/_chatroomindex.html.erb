@@ -35,7 +35,7 @@
                 (current_user.role != "student" && chatroom.emergency) %>
 
             <tr>
-              <td><%= link_to chatroom.topic, chatroom_path(chatroom), class:"label label-primary"%></td>
+              <td><%= link_to chatroom.topic, chatroom_path(chatroom), style:"color:black"%></td>
 
               <!-- Chat Initiation Status -->
               <% if !staff %>

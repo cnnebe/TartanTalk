@@ -1,9 +1,7 @@
 <%= render partial: 'layouts/navbar' %>
 <%= render partial: 'layouts/flash_success'%>
-<div class="container"> 
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
-            <div class="card card-container">
             <div class="well">
             <% if logged_in? %>
               <p>
@@ -43,15 +41,15 @@
                 </p>
 
                 <!-- Only actual staff member or admin can edit -->
-                <%= link_to 'Edit Staff Profile', edit_staff_path(@staff) %> |
-                <%= link_to 'Edit User Account', edit_user_path(@staff.user) %> |
+                <%= link_to 'Edit Staff Profile', edit_staff_path(@staff), class:"btn btn-pink" %> |
+                <%= link_to 'Edit User Account', edit_user_path(@staff.user), class:"btn btn-primary" %> |
               <% end %> 
 
               <% if current_user.role == "admin" %> <!-- Only an admin can remove a staff member -->
-                <%= link_to 'Remove User from Staff', @staff, method: :delete, data: { confirm: 'Are you sure?' } %>|
+                <%= link_to 'Remove User from Staff', @staff, method: :delete, data: { confirm: 'Are you sure?', class:"btn btn-warning" } %>|
               <% end %>
 
-              <%= link_to 'Back', staffs_path %>
+              <%= link_to 'Back', staffs_path, class:"btn btn-blue" %>
 
             <% else %>
               <h1> The page you requested does not exist or may be inaccessible. </h1>
@@ -59,7 +57,6 @@
             </div>
             </div>
         </div>
-    </div>
-</div>
+
 
 
